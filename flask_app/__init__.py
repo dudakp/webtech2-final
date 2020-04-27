@@ -1,18 +1,30 @@
+import os
+import pathlib
+
 from flask import Flask
 from flask_login import LoginManager
 from flask_pymongo import PyMongo
+from flask_bcrypt import Bcrypt
 
-
-app = Flask(__name__)
-app.config['SECRET_KEY'] = 'e751eafb3da666f6c31a766e766a0b22b4130f917211e5607213f9e3f8b3cb28'
-app.config["MONGO_URI"] = "mongodb://admin:password@147.175.121.89:27017/webtech2?authSource=admin&readPreference" \
-                          "=primary&appname=MongoDB%20Compass&ssl=false"
-app.config['MATLAB_FORMULAE_PATH'] = '/home/xhajdukp/flask_app/flask_app/matlab/'
-mongo = PyMongo(app)
-db = mongo.db
-matLab = app.config['MATLAB_FORMULAE_PATH']
+config_json_path = os.path.join(str(pathlib.Path.cwd()), 'flask_app/config.json')
+mongo = PyMongo()
+b_crypt = Bcrypt()
 login_manager = LoginManager()
+# login_manager.login_view('login')
 
-login_manager.init_app(app)
 
-from flask_app import routes
+def create_app(config_json=config_json_path):
+    app = Flask(__name__)
+    app.config.from_json(config_json, silent=False)
+    mongo.init_app(app)
+    b_crypt.init_app(app)
+    login_manager.init_app(app)
+
+    from flask_app.compute.routes import compute
+    from flask_app.auth.routes import auth
+    from flask_app.user.routes import user
+    app.register_blueprint(compute)
+    app.register_blueprint(auth)
+    app.register_blueprint(user)
+
+    return app
