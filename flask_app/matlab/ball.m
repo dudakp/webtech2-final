@@ -1,4 +1,6 @@
 function [y, t, x] = ball(r)
+    pkg load control
+
     m = 0.111;
     R = 0.015;
     g = -9.8;
