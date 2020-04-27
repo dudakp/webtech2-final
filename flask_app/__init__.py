@@ -18,7 +18,7 @@ cors = CORS()
 def create_app(config_json=config_json_path):
     app = Flask(__name__)
     app.config.from_json(config_json, silent=False)
-    CORS().init_app(app)
+    cors.init_app(app)
     mongo.init_app(app)
     b_crypt.init_app(app)
     login_manager.init_app(app)
