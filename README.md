@@ -28,6 +28,15 @@ Po nasadení na server (v našom prípade len nahranie novej verzie) je treba ap
 
 Ak by bolo nutné resotovať python server tak príkaz je: `sudo supervisorctl reload`
 
+
+## connfig
+
+Pre konfiguráciu premenných potrebných na chod flask aplikácie je potrebné si vytvoriť __config.json__ súbor v priečinku flask_app, ktorý sa nenachádza v aplikácii z bezpočnostných dôvodov. Pre bližšie otázky ohľadom atribútov a hodnôt kontokatovať: Peter Hajduk alebo Pavol Ďuďák
+
+## octave
+
+Aplikácia využíva na pozadí octave a preto je potrebné si na localnej mašine stiahnuť octave a package menom `control` cez octave-cli alebo klasicky z webu
+
 ## dependencies
 
 Nové dependencie sa pridávajú VÝHRADNE do requirements.txt ideálne aj z verziou (nech vsetci vyvýjame na tom istom). 
