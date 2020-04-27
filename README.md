@@ -31,7 +31,7 @@ Ak by bolo nutné resotovať python server tak príkaz je: `sudo supervisorctl r
 
 ## config
 
-Pre konfiguráciu premenných potrebných na chod flask aplikácie je potrebné si vytvoriť __config.json__ súbor v priečinku flask_app, ktorý sa nenachádza v aplikácii z bezpočnostných dôvodov. Pre bližšie otázky ohľadom atribútov a hodnôt kontokatovať: Peter Hajduk alebo Pavol Ďuďák
+Pre konfiguráciu premenných potrebných na chod flask aplikácie je potrebné si vytvoriť __config.json__ súbor v priečinku flask_app, ktorý sa nenachádza v aplikácii z bezpečnostných dôvodov. Pre bližšie otázky ohľadom atribútov a hodnôt kontokatovať: Peter Hajduk alebo Pavol Ďuďák
 
 ## octave
 
