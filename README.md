@@ -29,7 +29,7 @@ Po nasadení na server (v našom prípade len nahranie novej verzie) je treba ap
 Ak by bolo nutné resotovať python server tak príkaz je: `sudo supervisorctl reload`
 
 
-## connfig
+## config
 
 Pre konfiguráciu premenných potrebných na chod flask aplikácie je potrebné si vytvoriť __config.json__ súbor v priečinku flask_app, ktorý sa nenachádza v aplikácii z bezpočnostných dôvodov. Pre bližšie otázky ohľadom atribútov a hodnôt kontokatovať: Peter Hajduk alebo Pavol Ďuďák
 
