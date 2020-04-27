@@ -1,4 +1,6 @@
 function [y, t, x] = pendulum(r)
+    pkg load control
+
     M = .5;
     m = 0.2;
     b = 0.1;

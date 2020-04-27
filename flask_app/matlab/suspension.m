@@ -1,4 +1,6 @@
 function [y, t, x] = suspension(r)
+    pkg load control
+
     m1 = 2500; m2 = 320;
     k1 = 80000; k2 = 500000;
     b1 = 350; b2 = 15020;
