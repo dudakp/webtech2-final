@@ -3,6 +3,7 @@ __pycache__
 /flask_app/**/__pycache__
 /flask_app/matlab/octave-workspace
 config.json
+/flask_app/__pycache__/**
 
 # custom ignores - add here!!!
 .vscode
