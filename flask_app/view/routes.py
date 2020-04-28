@@ -1,0 +1,8 @@
+from flask import Blueprint, render_template
+
+view = Blueprint('view', __name__)
+
+
+@view.route('/')
+def profile():
+    return render_template('index.jinja')
