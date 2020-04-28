@@ -39,8 +39,13 @@ Aplikácia využíva na pozadí octave a preto je potrebné si na localnej maši
 
 ## dependencies
 
+### Python
 Nové dependencie sa pridávajú VÝHRADNE do requirements.txt ideálne aj z verziou (nech vsetci vyvýjame na tom istom). 
 Je možné inštalovať aj cez pip install ale môže sa stať že niekto zabudne freeznuť venv a dependencia sa nedostane do requirements.txt.
+
+### JS
+Ak chceš pridať novú dependenciu cez npm tak to sprav vo foldri `flask_app/static` pretože tam je `node_modules` a všetky statické assety.
+To znamená že aj `npm install` robiť v tom folderi.
 
 ## things to do so we can stay friends
 

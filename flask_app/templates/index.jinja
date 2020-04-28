@@ -1,0 +1,25 @@
+{# takto si importovat makra #}
+{% from 'macros/hello_firends.jinja' import hello_friends %}
+
+{% extends "base.jinja" %}
+{% block title %}Index{% endblock %}
+{% block head %}
+    {{ super() }}
+{% endblock %}
+
+{# do tokto bloku sa insertuju vsetky data #}
+{% block content %}
+    <div class="container">
+        <h1 class="display-3 text-center">Balkón - Láska, popiči láska</h1>
+        <p class="text-center">
+            Kde sa feti tu sa feti murko beha doplašeny <br>
+            kde su fetyy? (tralalala) <br>
+            Kde sa feti tu sa feti murko beha doplašeny <br>
+            kde su fetyy?(kde sú fety?)rychlo dajte fety. <br>
+        </p>
+        <div class="row justify-content-center">
+            {# makro je ako funkcia ktora ma svoje argumenty #}
+            {{ hello_friends("Zakova", "Fuck you") }}
+        </div>
+    </div>        
+{% endblock %}

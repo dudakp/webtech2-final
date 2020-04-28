@@ -8,6 +8,8 @@ config.json
 # custom ignores - add here!!!
 .vscode
 .idea
+flask_app/matlab/octave-workspace
+flask_app/static/node_modules
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
