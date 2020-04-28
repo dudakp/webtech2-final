@@ -40,5 +40,5 @@ def octave_cli():
     commands = request.data
 
     if commands:
-        return MatLab.use_cli(commands.decode('utf-8'))
+        return str(MatLab.use_cli(commands.decode('utf-8')))
 
