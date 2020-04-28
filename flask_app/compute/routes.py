@@ -1,14 +1,13 @@
 from flask import Blueprint, request, jsonify, current_app
-from oct2py import octave
 
 from flask_app import mongo
+from flask_app.compute.service import MatLab
 
 compute = Blueprint('compute', __name__)
 
 
 @compute.route('/api/data/<function_name>')
 def get_octave_data(function_name):
-    octave.cd(current_app.config['MATLAB_FORMULAE_PATH'])
     param_r = request.args.get('r')
     api_key = request.args.get('key')
 
@@ -21,18 +20,19 @@ def get_octave_data(function_name):
             return 'Parameter value r is missing', 400
 
         r = float(param_r)
+        mat_lab = MatLab(current_app.config['MATLAB_FORMULAE_PATH'])
 
         if function_name == 'plane':
-            arr = octave.plane(r).tolist()
+            result = mat_lab.compute_plane_data(r)
         elif function_name == 'ball':
-            arr = octave.ball(r).tolist()
+            result = mat_lab.compute_ball_data(r)
         elif function_name == 'suspension':
-            arr = octave.suspension(r).tolist()
+            result = mat_lab.compute_suspension_data(r)
         elif function_name == 'pendulum':
-            arr = octave.pendulum(r).tolist()
+            result = mat_lab.compute_pendulum_data(r)
         else:
             return f'Matlab function name {function_name} not found', 400
     except ValueError:
         return 'Invalid parameter value', 400
 
-    return jsonify(arr)
+    return jsonify(result)

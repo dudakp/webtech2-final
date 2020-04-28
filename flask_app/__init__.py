@@ -11,7 +11,8 @@ config_json_path = os.path.join(str(pathlib.Path.cwd()), 'flask_app/config.json'
 mongo = PyMongo()
 b_crypt = Bcrypt()
 login_manager = LoginManager()
-cors = CORS()
+cors = CORS(resources={r"/api/*": {"origins": "*"}})
+
 # login_manager.login_view('login')
 
 

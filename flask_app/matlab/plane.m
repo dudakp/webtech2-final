@@ -1,4 +1,4 @@
-function [y, t, x] = plane(r)
+function [plane_tilt, rear_flap_tilt] = plane(r)
     pkg load control
 
     A = [-0.313 56.7 0; -0.0139 -0.426 0; 0 56.7 0];
@@ -17,4 +17,7 @@ function [y, t, x] = plane(r)
     initQ = 0;
     initTheta = 0;
     [y, t, x] = lsim(sys, r*ones(size(t)), t, [initAlfa; initQ; initTheta]);
+
+    plane_tilt = x(:,3)
+    rear_flap_tilt = r*ones(size(t))*N-x*K'
 end

@@ -1,4 +1,4 @@
-function [y, t, x] = pendulum(r)
+function [pos, tilt] = pendulum(r)
     pkg load control
 
     M = .5;
@@ -22,4 +22,7 @@ function [y, t, x] = pendulum(r)
     initPozicia=0;
     initUhol=0;
     [y,t,x]=lsim(sys,r*ones(size(t)),t,[initPozicia;0;initUhol;0]);
+
+    pos = x(:, 1)
+    tilt = x(:, 3)
 end

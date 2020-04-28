@@ -1,4 +1,4 @@
-function [y, t, x] = ball(r)
+function [ball_pos, rod_pos] = ball(r)
     pkg load control
 
     m = 0.111;
@@ -18,5 +18,8 @@ function [y, t, x] = ball(r)
     t = 0:0.01:5;
     initRychlost=0;
     initZrychlenie=0;
-    [y,t,x]=lsim(N*sys,r*ones(size(t)),t,[initRychlost;0;initZrychlenie;0]);
+    [y,t,x] = lsim(N*sys,r*ones(size(t)),t,[initRychlost;0;initZrychlenie;0]);
+
+    ball_pos = N*x(:,1)
+    rod_pos = x(:,3)
 end

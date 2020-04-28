@@ -1,4 +1,4 @@
-function [y, t, x] = suspension(r)
+function [car_pos, wheel_pos] = suspension(r)
     pkg load control
 
     m1 = 2500; m2 = 320;
@@ -14,9 +14,12 @@ function [y, t, x] = suspension(r)
     sys = ss(Aa-Ba(:,1)*K,Ba,Ca,Da);
 
     t = 0:0.01:5;
-    initX1=0;
-    initX1d=0;
-    initX2=0;
-    initX2d=0;
-    [y,t,x]=lsim(sys*[0;1],r*ones(size(t)),t,[initX1;initX1d;initX2;initX2d;0]);
+    initX1 = 0;
+    initX1d = 0;
+    initX2 = 0;
+    initX2d = 0;
+    [y,t,x] = lsim(sys*[0;1],r*ones(size(t)),t,[initX1;initX1d;initX2;initX2d;0]);
+
+    car_pos = x(:,1)
+    wheel_pos = x(:,3)
 end
