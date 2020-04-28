@@ -1,19 +1,15 @@
 from flask import Blueprint, request, jsonify, current_app
 
-from flask_app import mongo
+from flask_app.auth.service import key_required
 from flask_app.compute.service import MatLab
 
 compute = Blueprint('compute', __name__)
 
 
-@compute.route('/api/data/<function_name>')
+@compute.route('/api/data/<function_name>', methods=['GET'])
+@key_required
 def get_octave_data(function_name):
     param_r = request.args.get('r')
-    api_key = request.args.get('key')
-
-    if api_key:
-        if not mongo.db.auth.find_one({'apiKey': api_key}):
-            return 'Invalid API key', 403
 
     try:
         if not param_r:
@@ -36,3 +32,13 @@ def get_octave_data(function_name):
         return 'Invalid parameter value', 400
 
     return jsonify(result)
+
+
+@compute.route('/api/cli', methods=['GET'])
+@key_required
+def octave_cli():
+    commands = request.data
+
+    if commands:
+        return MatLab.use_cli(commands.decode('utf-8'))
+

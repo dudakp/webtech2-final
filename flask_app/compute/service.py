@@ -23,8 +23,8 @@ class MatLab:
         self.switch_formulae_path(formulae_path)
         plane_tilt, rear_flap_tilt = octave.plane(r, nout=2)
         result = {
-            'plane_tilt': plane_tilt.tolist(),
-            'rear_flap_tilt': rear_flap_tilt.tolist()
+            'plane_tilt': plane_tilt.ravel().tolist(),
+            'rear_flap_tilt': rear_flap_tilt.ravel().tolist()
         }
 
         return result
@@ -33,8 +33,8 @@ class MatLab:
         self.switch_formulae_path(formulae_path)
         ball_pos, rod_pos = octave.ball(r, nout=2)
         result = {
-            'ball_pos': ball_pos.tolist(),
-            'rod_pos': rod_pos.tolist()
+            'ball_pos': ball_pos.ravel().tolist(),
+            'rod_pos': rod_pos.ravel().tolist()
         }
 
         return result
@@ -43,8 +43,8 @@ class MatLab:
         self.switch_formulae_path(formulae_path)
         car_pos, wheel_pos = octave.suspension(r, nout=2)
         result = {
-            'car_pos': car_pos.tolist(),
-            'wheel_pos': wheel_pos.tolist()
+            'car_pos': car_pos.ravel().tolist(),
+            'wheel_pos': wheel_pos.ravel().tolist()
         }
 
         return result
@@ -53,8 +53,12 @@ class MatLab:
         self.switch_formulae_path(formulae_path)
         pos, tilt = octave.pendulum(r, nout=2)
         result = {
-            'pos': pos.tolist(),
-            'tilt': tilt.tolist()
+            'pos': pos.ravel().tolist(),
+            'tilt': tilt.ravel().tolist()
         }
 
         return result
+
+    @staticmethod
+    def use_cli(commands: str):
+        return octave.feval(commands)
