@@ -6,6 +6,10 @@
         {# vsetky dependencie je mozno idealne natahovat tu #}
         <link href="{{ url_for('static', filename='node_modules/bootstrap/dist/css/bootstrap.min.css') }}"
               rel="stylesheet">
+        <link href="{{ url_for('static', filename='node_modules/bootstrap-slider/dist/css/bootstrap-slider.css') }}"
+              rel="stylesheet">
+        <link href="{{ url_for('static', filename='./style.css') }}"
+              rel="stylesheet">
         <title>{% block title %}{% endblock %} Webtech2 final assigment </title>
     {% endblock %}
 </head>
@@ -33,7 +37,8 @@
 <script src="{{ url_for('static', filename='node_modules/plotly.js-dist/plotly.js') }}"></script>
 <script src="{{ url_for('static', filename='node_modules/jquery/dist/jquery.min.js') }}"></script>
 <script src="{{ url_for('static', filename='node_modules/bootstrap/dist/js/bootstrap.min.js') }}"></script>
-{#<script src="{{ url_for('static', filename='./plotly-app.js') }}"></script>#}
+<script src="{{ url_for('static', filename='node_modules/bootstrap-slider/dist/bootstrap-slider.js') }}"></script>
+<script src="{{ url_for('static', filename='./plotly-app.js') }}"></script>
 </body>
 
 </html>
