@@ -1,7 +1,7 @@
 {# takto si importovat makra #}
-{% from 'macros/hello_firends.jinja' import hello_friends %}
+{% extends "base.jinja2" %}
+{% from 'macros/hello_firends.jinja2' import hello_friends %}
 
-{% extends "base.jinja" %}
 {% block title %}Index{% endblock %}
 {% block head %}
     {{ super() }}

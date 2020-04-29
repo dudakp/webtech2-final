@@ -5,7 +5,7 @@
     {% block head %}
     {# vsetky dependencie je mozno idealne natahovat tu #}
     <link href="{{ url_for('static', filename='node_modules/bootstrap/dist/css/bootstrap.min.css') }}" rel="stylesheet">
-    <script href="{{ url_for('static', filename='node_modules/bootstrap/dist/js/bootstrap.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='node_modules/bootstrap/dist/js/bootstrap.min.js') }}"></script>
     <title>{% block title %}{% endblock %} Webtech2 final assigment </title>
     {% endblock %}
 </head>

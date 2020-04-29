@@ -5,4 +5,4 @@ view = Blueprint('view', __name__)
 
 @view.route('/')
 def profile():
-    return render_template('index.jinja')
+    return render_template('index.jinja2')
