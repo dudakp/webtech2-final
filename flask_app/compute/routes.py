@@ -1,10 +1,13 @@
-from flask import Blueprint, request, jsonify, current_app
+from pathlib import Path
+
+from flask import Blueprint, request, jsonify, current_app, send_file
 from oct2py import Oct2PyError
 from datetime import datetime
 
 from flask_app import mongo
 from flask_app.auth.service import key_required
 from flask_app.compute.service import MatLab
+from flask_app.util.export import DBExporter
 from flask_app.util.logger import Logger
 
 compute = Blueprint('compute', __name__)
@@ -57,3 +60,19 @@ def octave_cli():
         except Oct2PyError as e:
             logger.log(commands.decode('utf-8'), datetime.utcnow(), 'ERROR', str(e))
             return 'Invalid statement(s)', 400
+    else:
+        return 'No commands inserted in body', 400
+
+
+@compute.route('/api/export/csv', methods=['GET'])
+def csv_export():
+    exporter = DBExporter(mongo.db, 'log')
+    exporter.all_to_csv()
+    return send_file(str(Path(__file__).parent.absolute()) + '/../static/export.csv', 'export.csv')
+
+
+@compute.route('/api/export/pdf', methods=['GET'])
+def pdf_export():
+    exporter = DBExporter(mongo.db, 'log')
+    exporter.all_to_pdf()
+    return send_file(str(Path(__file__).parent.absolute()) + '/../static/export.pdf', 'export.pdf')
