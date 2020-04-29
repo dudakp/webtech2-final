@@ -5,25 +5,29 @@ const options = [
     {value: 'plane', text: 'Aircraft Pitch'},
 ];
 
-
 $(document).ready(function () {
+    let slider = $("input#slider").bootstrapSlider({
+        precision: 2,
+        tooltip: 'always'
+    });
     options.forEach(option => {
         $('#data-options').append($('<option>', option));
     });
 
-    $('#data-options').on('change', function () {
-        if (this.value !== 0) {
-            getData(this.value);
+    $('#show').on('click', () => {
+        const type = $('#data-options').val();
+        if (type !== '0') {
+            getData(type, slider.bootstrapSlider('getValue'));
         }
     })
 });
 
-function getData(type) {
+function getData(type, value) {
     if (graphInterval) {
         stopGraph();
     }
     // todo do we want to use localhost when on localhost?
-    $.get(`http://147.175.121.210:9687/api/data/${type}?r=0.2&key=5098a67d11ed2dd2477b8a509b681a7a7bbacdde5783101e09b4e7e25ba51e7bef4a6d`,
+    $.get(`http://147.175.121.210:9687/api/data/${type}?r=${value}&key=5098a67d11ed2dd2477b8a509b681a7a7bbacdde5783101e09b4e7e25ba51e7bef4a6d`,
         (response) => {
             drawGraph(response);
         }).fail(err => console.log('fail: ', err))

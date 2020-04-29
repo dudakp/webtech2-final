@@ -1,3 +1,11 @@
 #chart {
     height: 300px;
 }
+
+.tooltip.in {
+  opacity: 1;
+}
+
+.slider-group {
+    margin-top: 2em;
+}
