@@ -65,6 +65,7 @@ def octave_cli():
 
 
 @compute.route('/api/export/csv', methods=['GET'])
+@key_required
 def csv_export():
     exporter = DBExporter(mongo.db, 'log')
     exporter.all_to_csv()
@@ -72,6 +73,7 @@ def csv_export():
 
 
 @compute.route('/api/export/pdf', methods=['GET'])
+@key_required
 def pdf_export():
     exporter = DBExporter(mongo.db, 'log')
     exporter.all_to_pdf()
