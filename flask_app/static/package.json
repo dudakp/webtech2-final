@@ -9,6 +9,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "bootstrap": "^4.4.1"
+    "bootstrap": "^4.4.1",
+    "jquery": "^3.5.0",
+    "plotly.js-dist": "^1.53.0"
   }
 }
