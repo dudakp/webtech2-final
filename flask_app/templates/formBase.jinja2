@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% block head %}
+        <link href="{{ url_for('static', filename='node_modules/bootstrap/dist/css/bootstrap.min.css') }}"
+              rel="stylesheet">
+        <link href="{{ url_for('static', filename='./form-style.css') }}"
+              rel="stylesheet">
+        <title>{% block title %}{% endblock %} Webtech2 final assigment </title>
+    {% endblock %}
+</head>
+
+<body>
+    <div>
+        <h3 class="text-center text-white pt-5">Octavia proxy</h3>
+        <div class="container">
+            <div id="login-row" class="row justify-content-center align-items-center">
+                <div id="login-column" class="col-md-6 col-10">
+                    <div id="login-box" class="col-md-12">
+    {% block content %}
+    {% endblock %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<footer class="page-footer font-small blue">
+    <div class="footer-copyright text-center py-3">
+        {% block footer %}
+            &copy; Copyright 2020 by Andrej Fula, Pavol Dudak, Peter Hajduk & Peter Vigh.
+        {% endblock %}
+    </div>
+</footer>
+</body>
+</html>

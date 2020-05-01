@@ -1,0 +1,41 @@
+{% extends "formBase.jinja2" %}
+
+{% block content %}
+    <form id="login-form" class="form" action="" method="post">
+        <h3 class="text-center text-info">Prihlásenie</h3>
+        <div class="form-group">
+            {{ form.email.label(class_="text-info") }}
+            {{ form.email(class_="form-control") }}
+            {% if form.email.errors %}
+                <ul class="errors">
+                    {% for error in form.email.errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </div>
+        <div class="form-group">
+            {{ form.password.label(class_="text-info") }}
+            {{ form.password(class_="form-control") }}
+            {% if form.password.errors %}
+                <ul class="errors">
+                    {% for error in form.password.errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        </div>
+        <div class="form-check">
+            {{ form.remember(class_="form-check-input") }}
+            {{ form.remember.label(class_="text-info form-check-label") }}
+        </div>
+        <div class="form-group">
+            <input type="submit" name="submit" class="btn btn-info btn-md" value="Prihlásiť sa">
+        </div>
+        <br>
+        <div id="register-link" class="text-right">
+            <a href="/register" class="text-info">Ešte nemáte účet?</a>
+        </div>
+    </form>
+
+{% endblock %}

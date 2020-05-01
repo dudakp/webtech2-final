@@ -1,0 +1,31 @@
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #008080;
+  height: 100vh;
+}
+div .container #login-row #login-column #login-box {
+  margin-top: 14vh;
+  background-color: #EAEAEA;
+}
+div .container #login-row #login-column #login-box #login-form {
+  padding: 20px;
+}
+div .container #login-row #login-column #login-box #login-form #register-link {
+  margin-top: -85px;
+}
+
+.btn {
+    margin: 0 0 1em;
+}
+
+.form-check {
+    margin-bottom: 0.4em;
+}
+
+.errors {
+    color: red;
+    list-style-type: none;
+    width: 100%;
+    padding-inline-start: 0;
+}
