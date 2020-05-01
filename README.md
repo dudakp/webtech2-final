@@ -8,14 +8,16 @@
 Príkaz vytvorí virtual enviroment pre python - toto preto treba spravil len prvý krat na svojom PC.
 
 ### pri kazdom pull-e
-1. `source ./venv/bin/activate`
+1. `source ./venv/bin/activate` 
+(pre Windows: `venv\Scripts\activate.bat`)
 2. `pip install -r requirements.txt`
 
 Pri každom pull-e z GitHub-u je dobré sputiť druhý príkaz. Ten stiahne všetky nové dependencie ktoré sú v requirements.txt
 
 ## run
 
-1. `source ./venv/bin/activate`
+1. `source ./venv/bin/activate` 
+(pre Windows: `venv\Scripts\activate.bat`)
 2. `python ./run.py`
 
 Spúštanie appky pre local vývoj. Prvý príkaz sputiť len prvý krát pri otvorení projektu (a vždy ked znova otváram projekt) aby sme boli v termináli v pythonovom virtuálnom enviromente.
@@ -35,7 +37,9 @@ Pre konfiguráciu premenných potrebných na chod flask aplikácie je potrebné 
 
 ## octave
 
-Aplikácia využíva na pozadí octave a preto je potrebné si na localnej mašine stiahnuť octave a package menom `control` cez octave-cli alebo klasicky z webu
+Aplikácia využíva na pozadí octave a preto je potrebné si na localnej mašine stiahnuť octave a package menom `control` cez octave-cli alebo klasicky z webu.
+Ak aj po nainštalovaní octave ostane problém (Cannot find octave-cli.exe), je potrebné skontrolovať či sa vytvorila env. variable OCTAVE_EXECUTABLE a ukazuje priamo na umiestnenie octave-cli.exe.
+Oplatí sa to pridať aj do PATH. Po ručnom pridaní týchto hodnôt je potrebné reštartovať PC.
 
 ## dependencies
 
