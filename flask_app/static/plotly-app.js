@@ -26,8 +26,8 @@ function getData(type, value) {
     if (graphInterval) {
         stopGraph();
     }
-    // todo do we want to use localhost when on localhost?
-    $.get(`http://147.175.121.210:9687/api/data/${type}?r=${value}&key=5098a67d11ed2dd2477b8a509b681a7a7bbacdde5783101e09b4e7e25ba51e7bef4a6d`,
+    // todo somehow get api key of logged user from BE
+    $.get(`/api/data/${type}?r=${value}&key=5098a67d11ed2dd2477b8a509b681a7a7bbacdde5783101e09b4e7e25ba51e7bef4a6d`,
         (response) => {
             drawGraph(response);
         }).fail(err => console.log('fail: ', err))

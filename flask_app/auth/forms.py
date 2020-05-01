@@ -12,9 +12,10 @@ class RegistrationForm(Form):
     ])
     password = PasswordField('Password:', validators=[
         validators.DataRequired(),
-        validators.EqualTo('passwordRepeat', message='Passwords don\'t match')
     ])
-    passwordRepeat = PasswordField('Repeat password:')
+    passwordRepeat = PasswordField('Repeat password:', validators=[
+        validators.EqualTo('password', message='Passwords don\'t match')
+    ])
 
     def validate_username(self, username):
         result = mongo.db.auth.find_one({'username': username.data})
