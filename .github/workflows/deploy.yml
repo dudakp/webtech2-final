@@ -5,9 +5,9 @@ name: Deploy pipeline
 
 on:
   push:
-    branches: [ master ]
+    branches: [ pipeline ]
   pull_request:
-    branches: [ master ]
+    branches: [ pipeline ]
 
 jobs:
   ano:

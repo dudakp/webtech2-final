@@ -47,6 +47,12 @@ Je možné inštalovať aj cez pip install ale môže sa stať že niekto zabudn
 Ak chceš pridať novú dependenciu cez npm tak to sprav vo foldri `flask_app/static` pretože tam je `node_modules` a všetky statické assety.
 To znamená že aj `npm install` robiť v tom folderi.
 
+### i18n
+spustit generovanie suboru ktory ma v sebe texty oznacene na preklad (musis byt v priecinku `flask_app`): `pybabel extract -F babel.cfg -o locale/messages.pot ./`  
+spustenie generovania 'language catalog' : `pybabel init -i locale/messages.pot -d translations -l en`  
+skompilovania upravenych prekladov: `pybabel compile -d translations`
+
+
 ## things to do so we can stay friends
 
 Prosím vás každú feature si dávajte do svojej branche
