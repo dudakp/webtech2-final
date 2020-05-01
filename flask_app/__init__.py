@@ -36,6 +36,7 @@ def create_app(config_json=config_json_path):
     cors.init_app(app)
     mongo.init_app(app)
     b_crypt.init_app(app)
+    login_manager.login_view = 'auth.login'
     login_manager.init_app(app)
 
     # blueprints

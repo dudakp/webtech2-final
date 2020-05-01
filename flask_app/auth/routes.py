@@ -1,8 +1,8 @@
 import os
 from binascii import hexlify
 
-from bson.json_util import dumps
-from flask import Blueprint, request, current_app
+import random
+from flask import Blueprint, request, current_app, render_template, redirect
 from flask_login import login_required, current_user, login_user, logout_user
 
 from flask_app import b_crypt, mongo
@@ -23,10 +23,10 @@ def issue_api_key():
     return key.decode('utf-8')
 
 
-@auth.route('/register', methods=['POST'])
+@auth.route('/register', methods=['GET', 'POST'])
 def register_user():
     if current_user.is_authenticated:
-        return 'already logged in', 403
+        return redirect('/')
 
     form = RegistrationForm(request.form)
 
@@ -40,14 +40,14 @@ def register_user():
             'apiKey': ''
         }
         mongo.db.auth.save(user)
-        return dumps(user), 200
+        return redirect('/login')
+    return render_template("register.jinja2", form=form)
 
 
 @auth.route('/login', methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
-        return 'already logged in', 403
-
+        return redirect('/')
     form = LoginForm(request.form)
     if request.method == 'POST' and form.validate():
         result = mongo.db.auth.find_one({'email': form.email.data})
@@ -55,13 +55,18 @@ def login():
             user = User(result['username'], result['password'], result['email'],
                         result['firstName'], result['lastName']
                         )
-            login_user(user, remember=False)
-            return 'logged in', 200
-    return 'Username or password does not match!', 400
+            login_user(user, remember=form.remember)
+            return redirect('/')
+        elif bool(random.getrandbits(1)):
+            form.password.errors.append('This looks like like password of hajdukpe.'
+                                        ' Try logging in as hajdukpe@gmail.com')
+        else:
+            form.password.errors.append('Invalid password')
+    return render_template('login.jinja2', form=form)
 
 
 @auth.route('/logout', methods=['POST'])
 @login_required
 def logout():
     logout_user()
-    return 'logged out', 200
+    return redirect('/login')
