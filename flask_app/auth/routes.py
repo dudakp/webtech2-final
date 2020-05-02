@@ -1,7 +1,6 @@
 import os
 from binascii import hexlify
 
-import random
 from flask import Blueprint, request, current_app, render_template, redirect
 from flask_login import login_required, current_user, login_user, logout_user
 
@@ -57,9 +56,6 @@ def login():
                         )
             login_user(user, remember=form.remember)
             return redirect('/')
-        elif bool(random.getrandbits(1)):
-            form.password.errors.append('This looks like like password of hajdukpe.'
-                                        ' Try logging in as hajdukpe@gmail.com')
         else:
             form.password.errors.append('Invalid password')
     return render_template('login.jinja2', form=form)
