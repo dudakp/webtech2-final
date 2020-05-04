@@ -5,6 +5,38 @@ const options = [
     {value: 'plane', text: 'Aircraft Pitch'},
 ];
 
+window.ball = {
+    src: 'http://getdrawings.com/image/step-by-step-airplane-drawing-57.jpg',
+    angles: [],
+    flapAngles: [],
+    currentAngle: 0,
+    currentFlapAngle: 0
+};
+
+window.suspension = {
+    src: 'http://getdrawings.com/image/step-by-step-airplane-drawing-57.jpg',
+    angles: [],
+    flapAngles: [],
+    currentAngle: 0,
+    currentFlapAngle: 0
+};
+
+window.pendulum = {
+    src: 'http://getdrawings.com/image/step-by-step-airplane-drawing-57.jpg',
+    angles: [],
+    flapAngles: [],
+    currentAngle: 0,
+    currentFlapAngle: 0
+};
+
+window.plane = {
+    src: 'static/plane.png',
+    angles: [],
+    flapAngles: [],
+    currentAngle: 0,
+    currentFlapAngle: 0
+};
+
 $(document).ready(function () {
     let slider = $("input#slider").bootstrapSlider({
         precision: 2,
@@ -16,7 +48,6 @@ $(document).ready(function () {
 
     $('#show').on('click', () => {
         const type = $('#data-options').val();
-        letsGo();
         if (type !== '0') {
             getData(type, slider.bootstrapSlider('getValue'));
         }
@@ -30,7 +61,19 @@ function getData(type, value) {
     // todo somehow get api key of logged user from BE
     $.get(`/api/data/${type}?r=${value}&key=5098a67d11ed2dd2477b8a509b681a7a7bbacdde5783101e09b4e7e25ba51e7bef4a6d`,
         (response) => {
-            drawGraph(response);
+            switch (type) {
+                case 'ball':
+                    break;
+                case 'suspension':
+                    break;
+                case 'pendulum':
+                    break;
+                case 'plane':
+                    window.plane.angles = response.plane_tilt;
+                    window.plane.currentFlapAngle = response.rear_flap_tilt;
+                    break;
+            }
+            drawGraph(response, type);
             loadAnimationScript(type);
         }).fail(err => console.log('fail: ', err))
 }
@@ -41,11 +84,27 @@ let plotY1;
 let plotY2;
 let i = 0;
 
-function drawGraph(data) {
+function drawGraph(data, type) {
     graphInterval = setInterval(() => {
+        // plotly data
         plotX = i;
         plotY1 = data[Object.keys(data)[0]][i];
         plotY2 = data[Object.keys(data)[1]][i++];
+
+        // animacne data
+        switch (type) {
+            case 'ball':
+                break;
+            case 'suspension':
+                break;
+            case 'pendulum':
+
+                break;
+            case 'plane':
+                window.plane.currentAngle = window.plane.angles[i];
+                window.plane.currentFlapAngle = window.plane.flapAngles[i];
+                break;
+        }
         updatePlotly();
         if (i === data[Object.keys(data)[0]].length) {
             clearInterval(graphInterval);

@@ -9,31 +9,29 @@
 
 {# do tokto bloku sa insertuju vsetky data #}
 {% block content %}
-    <div class="container">
-        <h1 class="display-3 text-center">Balkón - Láska, popiči láska</h1>
-        <p class="text-center">
-            Kde sa feti tu sa feti murko beha doplašeny <br>
-            kde su fetyy? (tralalala) <br>
-            Kde sa feti tu sa feti murko beha doplašeny <br>
-            kde su fetyy?(kde sú fety?)rychlo dajte fety. <br>
-        </p>
-        <div class="row justify-content-center">
-            {# makro je ako funkcia ktora ma svoje argumenty #}
-            {{ hello_friends("fiends", "Hello") }}
-            <form>
+    <div class="container simulation-content">
+        <div class="row">
+            <div class="col">
                 <div class="form-group">
                     <select id="data-options" class="custom-select">
                         <option selected value="0">{{ _('Vyber si pekne ktore data chces zobrazit') }}</option>
                     </select>
                 </div>
                 <div class="form-group slider-group">
-                    <label for="slider">Parameter: </label>
-                    <input id="slider" type="text" class="form-control"
-                           data-slider-min="0" data-slider-max="50" data-slider-step="0.1" data-slider-value="0.2"/>
+                    <input type="range" class="form-control-range" id="slider" data-slider-min="0"
+                           data-slider-max="1"
+                           data-slider-step="0.05" data-slider-value="0.2">
                 </div>
-                <button type="button" class="btn btn-primary" id="show">{{ _('Zobraz graf') }}</button>
-            </form>
-            <div id="chart"></div>
+                <button type="button" onclick="createPlaneSprite(); movePlane();" class="btn btn-primary btn-block" id="show">{{ _('Zobraz graf') }}</button>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-7">
+                <div id="canvas"></div>
+            </div>
+            <div class="col-5">
+                <div id="chart"></div>
+            </div>
         </div>
     </div>
 {% endblock %}
