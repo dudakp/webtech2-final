@@ -30,6 +30,7 @@ function getData(type, value) {
     $.get(`/api/data/${type}?r=${value}&key=5098a67d11ed2dd2477b8a509b681a7a7bbacdde5783101e09b4e7e25ba51e7bef4a6d`,
         (response) => {
             drawGraph(response);
+            loadAnimationScript(type);
         }).fail(err => console.log('fail: ', err))
 }
 
@@ -86,4 +87,18 @@ function stopGraph() {
     i = 0;
     plotY1 = undefined;
     plotY2 = undefined;
+}
+
+function loadAnimationScript(type) {
+    if ($('#animation-script')) {
+        $('#animation-script').remove();
+    }
+    const script = document.createElement('script');
+    script.onload = () => {
+        //do stuff with the script
+    };
+    script.src = `static/${type}-animation.js`;
+    script.id = 'animation-script';
+
+    document.body.appendChild(script); //or something of the likes
 }
