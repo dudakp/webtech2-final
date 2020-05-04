@@ -2,7 +2,7 @@ import json
 import os
 import pathlib
 
-from flask import Flask, request
+from flask import Flask, request, session
 from flask_babel import Babel
 from flask_bcrypt import Bcrypt
 from flask_cors import CORS
@@ -27,7 +27,15 @@ with open(config_json_path) as f:
 
 @babel.localeselector
 def get_locale():
-    return request.accept_languages.best_match(config['LANGUAGES'].keys())
+    # if the user has set up the language manually it will be stored in the session,
+    # so we use the locale from the user settings
+    try:
+        language = session['language']
+    except KeyError:
+        language = None
+    if language is not None:
+        return language
+    return request.accept_languages.best_match(app.config['LANGUAGES'].keys())
 
 
 def create_app(config_json=config_json_path):
@@ -50,3 +58,10 @@ def create_app(config_json=config_json_path):
     app.register_blueprint(view)
 
     return app
+
+
+@app.context_processor
+def inject_conf_var():
+    return dict(
+        AVAILABLE_LANGUAGES=config['LANGUAGES'],
+        CURRENT_LANGUAGE=session.get('language', request.accept_languages.best_match(config['LANGUAGES'].keys())))

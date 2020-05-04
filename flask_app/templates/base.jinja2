@@ -24,6 +24,13 @@
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
+    {% for language in AVAILABLE_LANGUAGES.items() %}
+        {% if CURRENT_LANGUAGE == language[0] %}
+            {{ language[1] }}
+        {% else %}
+            <a href="{{ url_for('user.set_language', language=language[0]) }}">{{ language[1] }}</a>
+        {% endif %}
+    {% endfor %}
 </nav>
 <div id="content">
     {% block content %}
