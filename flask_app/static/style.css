@@ -3,10 +3,17 @@
 }
 
 .tooltip.in {
-  opacity: 1;
+    opacity: 1;
 }
 
 .slider-group {
     margin-top: 2em;
 }
 
+.simulation-content {
+    margin-top: 3rem;
+}
+
+#canvas {
+    margin-top: 1rem;
+}

@@ -16,6 +16,7 @@ $(document).ready(function () {
 
     $('#show').on('click', () => {
         const type = $('#data-options').val();
+        letsGo();
         if (type !== '0') {
             getData(type, slider.bootstrapSlider('getValue'));
         }
