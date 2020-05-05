@@ -31,17 +31,21 @@ window.pendulum = {
 
 window.plane = {
     src: 'static/plane.png',
+    flapSrc: 'static/flap.png',
     angles: [],
     flapAngles: [],
     currentAngle: 0,
     currentFlapAngle: 0
 };
 
-$(document).ready(function () {
+const initSlider = () => {
+    console.log('plotly init');
+
     let slider = $("input#slider").bootstrapSlider({
         precision: 2,
         tooltip: 'always'
     });
+
     options.forEach(option => {
         $('#data-options').append($('<option>', option));
     });
@@ -51,8 +55,8 @@ $(document).ready(function () {
         if (type !== '0') {
             getData(type, slider.bootstrapSlider('getValue'));
         }
-    })
-});
+    });
+};
 
 function getData(type, value) {
     if (graphInterval) {
@@ -70,7 +74,7 @@ function getData(type, value) {
                     break;
                 case 'plane':
                     window.plane.angles = response.plane_tilt;
-                    window.plane.currentFlapAngle = response.rear_flap_tilt;
+                    window.plane.flapAngles = response.rear_flap_tilt;
                     break;
             }
             drawGraph(response, type);
