@@ -45,7 +45,7 @@ $(document).ready(function () {
     options.forEach(option => {
         $('#data-options').append($('<option>', option));
     });
-
+    getApiKey();
     $('#show').on('click', () => {
         const type = $('#data-options').val();
         if (type !== '0') {
@@ -56,8 +56,7 @@ $(document).ready(function () {
 
 function getData(type, value) {
     if (graphInterval) stopGraph();
-    // todo somehow get api key of logged user from BE
-    $.get(`/api/data/${type}?r=${value}&key=5098a67d11ed2dd2477b8a509b681a7a7bbacdde5783101e09b4e7e25ba51e7bef4a6d`,
+    $.get(`/api/data/${type}?r=${value}&key=${sessionStorage.getItem('apiKey')}`,
         response => {
             switch (type) {
                 case 'ball':
@@ -160,4 +159,13 @@ function loadAnimationScript(type) {
     script.id = 'animation-script';
 
     document.body.appendChild(script); //or something of the likes
+}
+
+function getApiKey() {
+    let apiKey = sessionStorage.getItem('apiKey');
+    if (!apiKey) {
+        $.get('/issue-key', (key) => {
+            sessionStorage.setItem('apiKey', key);
+        })
+    }
 }
