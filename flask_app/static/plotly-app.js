@@ -22,11 +22,11 @@ window.suspension = {
 };
 
 window.pendulum = {
-    src: 'http://getdrawings.com/image/step-by-step-airplane-drawing-57.jpg',
-    angles: [],
-    flapAngles: [],
-    currentAngle: 0,
-    currentFlapAngle: 0
+    src: 'static/obdlznik.png',
+    pos: [],
+    tilt: [],
+    currentPos: 0,
+    currentTilt: 0
 };
 
 window.plane = {
@@ -55,18 +55,18 @@ $(document).ready(function () {
 });
 
 function getData(type, value) {
-    if (graphInterval) {
-        stopGraph();
-    }
+    if (graphInterval) stopGraph();
     // todo somehow get api key of logged user from BE
     $.get(`/api/data/${type}?r=${value}&key=5098a67d11ed2dd2477b8a509b681a7a7bbacdde5783101e09b4e7e25ba51e7bef4a6d`,
-        (response) => {
+        response => {
             switch (type) {
                 case 'ball':
                     break;
                 case 'suspension':
                     break;
                 case 'pendulum':
+                    window.pendulum.pos = response.pos;
+                    window.pendulum.tilt = response.tilt;
                     break;
                 case 'plane':
                     window.plane.angles = response.plane_tilt;
@@ -75,7 +75,7 @@ function getData(type, value) {
             }
             drawGraph(response, type);
             loadAnimationScript(type);
-        }).fail(err => console.log('fail: ', err))
+        }).fail(err => console.log('fail: ', err));
 }
 
 let graphInterval;
@@ -98,7 +98,8 @@ function drawGraph(data, type) {
             case 'suspension':
                 break;
             case 'pendulum':
-
+                window.pendulum.currentPos = window.pendulum.pos[i];
+                window.pendulum.currentTilt = window.pendulum.tilt[i];
                 break;
             case 'plane':
                 window.plane.currentAngle = window.plane.angles[i];
@@ -106,9 +107,7 @@ function drawGraph(data, type) {
                 break;
         }
         updatePlotly();
-        if (i === data[Object.keys(data)[0]].length) {
-            clearInterval(graphInterval);
-        }
+        if (i === data[Object.keys(data)[0]].length) clearInterval(graphInterval);
     }, 100);
 
     function updatePlotly() {

@@ -66,3 +66,11 @@ def login():
 def logout():
     logout_user()
     return redirect('/login')
+
+
+@auth.route('/key', methods=['GET'])
+@login_required
+def get_api_key():
+    username: str = current_user.get_id()
+    result = mongo.db.auth.find_one({'username': username})
+    return result['apiKey']
