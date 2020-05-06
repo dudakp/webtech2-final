@@ -14,7 +14,7 @@ window.ball = {
 };
 
 window.pendulum = {
-    src: 'static/obdlznik.png',
+    src: 'static/assets/pendulum/obdlznik.png',
     pos: [],
     tilt: [],
     currentPos: 0,
@@ -22,7 +22,7 @@ window.pendulum = {
 };
 
 window.plane = {
-    src: 'static/plane.png',
+    src: 'static/assets/plane/plane.png',
     angles: [],
     flapAngles: [],
     currentAngle: 0,

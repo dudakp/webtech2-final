@@ -1,3 +1,6 @@
+@import "navbar-style.css";
+@import "suspension-style.css";
+
 #chart {
     height: 300px;
 }
