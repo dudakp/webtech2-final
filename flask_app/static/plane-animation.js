@@ -11,36 +11,36 @@ $(document).ready(() => {
     document.getElementById('canvas').appendChild(window.app.view);
 
 
-    // const planeSprite = PIXI.Sprite.from(window.plane.src);
-    // // center the sprite's anchor point
-    // planeSprite.anchor.set(0.5);
-    // // move the sprite to the center of the screen
-    // planeSprite.x = window.app.screen.width / 2;
-    // planeSprite.y = window.app.screen.height / 2;
+    const planeSprite = PIXI.Sprite.from(window.plane.src);
+    // center the sprite's anchor point
+    planeSprite.anchor.set(0.5);
+    // move the sprite to the center of the screen
+    planeSprite.x = window.app.screen.width / 2;
+    planeSprite.y = window.app.screen.height / 2;
 
-    const pendulumSprite = PIXI.Sprite.from(window.pendulum.src);
+    // const pendulumSprite = PIXI.Sprite.from(window.pendulum.src);
+    //
+    // pendulumSprite.anchor.set(0.5);
+    // pendulumSprite.x = window.app.screen.width / 2;
+    // pendulumSprite.y = window.app.screen.height;
 
-    pendulumSprite.anchor.set(0.5);
-    pendulumSprite.x = window.app.screen.width / 2;
-    pendulumSprite.y = window.app.screen.height;
 
-
-    // window.createPlaneSprite = () => {
-    //     // window.app.destroy();
-    //     window.app.stage.addChild(planeSprite);
-    // };
-
-    window.createPendulumSprite = () => {
-        window.app.stage.addChild(pendulumSprite)
+    window.createPlaneSprite = () => {
+        // window.app.destroy();
+        window.app.stage.addChild(planeSprite);
     };
 
-    createPendulumSprite();
+    // window.createPendulumSprite = () => {
+    //     window.app.stage.addChild(pendulumSprite)
+    // };
+
+    createPlaneSprite();
     // Listen for animate update
-    // window.app.ticker.add((delta) => {
-    //     // just for fun, let's rotate mr rabbit a little
-    //     // delta is 1 if running at 100% performance
-    //     // creates frame-independent transformation
-    //     planeSprite.rotation = -window.plane.currentAngle;
-    //
-    // });
+    window.app.ticker.add((delta) => {
+        // just for fun, let's rotate mr rabbit a little
+        // delta is 1 if running at 100% performance
+        // creates frame-independent transformation
+        planeSprite.rotation = -window.plane.currentAngle;
+
+    });
 });
