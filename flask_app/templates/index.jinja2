@@ -11,25 +11,30 @@
 {% block content %}
     <div class="container simulation-content">
         <div class="row">
-            <div class="col">
-                <div class="form-group">
-                    <select id="data-options" class="custom-select">
-                        <option selected value="0">{{ _('Vyber si pekne ktore data chces zobrazit') }}</option>
-                    </select>
-                </div>
-                <div class="form-group slider-group">
-                    <input type="range" class="form-control-range" id="slider" data-slider-min="-1"
-                           data-slider-max="1"
-                           data-slider-step="0.05" data-slider-value="0.2">
-                </div>
-                <button type="button" class="btn btn-primary btn-block" id="show">{{ _('Zobraz graf') }}</button>
+            <div class="col-md-4 col-sm-12">
+                <select id="data-options" class="custom-select">
+                    <option selected hidden disabled>{{ _('Vyber si pekne ktore data chces zobrazit') }}</option>
+                </select>
+            </div>
+            <div class="col-md-4 col-sm-12">
+                <span id="parameter-slider-label">Parameter:</span>
+                <input type="range" class="form-control-range" id="parameter-slider" data-slider-min="-1"
+                       data-slider-max="1" data-slider-id="parameter-slider-data"
+                       data-slider-step="0.05" data-slider-value="0.2">
+            </div>
+            <div class="col-md-4 col-sm-12">
+                <span id="speed-slider-label">Speed:</span>
+                <input type="range" class="form-control-range" id="speed-slider" data-slider-min="0"
+                       data-slider-max="2" data-slider-id="speed-slider-data"
+                       data-slider-step="0.1" data-slider-value="1">
             </div>
         </div>
+        <button type="button" class="btn btn-primary btn-block top-margin" id="show">{{ _('Zobraz graf') }}</button>
         <div class="row">
-            <div class="col-7">
+            <div class="col-12 col-lg-7">
                 <div id="canvas"></div>
             </div>
-            <div class="col-5">
+            <div class="col-12 col-lg-5">
                 <div id="chart"></div>
             </div>
         </div>

@@ -1,3 +1,4 @@
+let stopped = true;
 function createObjectsForAnimation() {
     $('#canvas').css('width', '600px')
         .css('height', '400px')
@@ -19,20 +20,30 @@ function createObjectsForAnimation() {
 }
 createObjectsForAnimation();
 
-
 function stopAnimation() {
     $('.animated').each((index, value) => {
         $('.animated')[index].style.webkitAnimationPlayState = 'paused';
     });
+    stopped = true;
 }
 
 function startAnimation() {
+    stopped = false;
     $('.animated').each((index, value) => {
         $('.animated')[index].style.webkitAnimationPlayState = 'running';
     });
 }
 
 function updateAnimation(value1, value2) {
+    if (stopped) {
+        startAnimation();
+    }
     $('.car img').css('transform', 'translateY(' + (value1 - r) * 10 + 'px)');
     $('.wheels').css('transform', 'translateY(' + value2 * 10 + 'px)');
+}
+
+function updateAnimationSpeed(value) {
+    $('.road').css('-webkit-animation-duration', 5 / value + 's');
+    $('.city').css('-webkit-animation-duration', 5 / value + 's');
+    $('.wheels img').css('-webkit-animation-duration', 1 / value + 's');
 }

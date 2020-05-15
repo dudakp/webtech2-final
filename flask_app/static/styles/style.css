@@ -2,14 +2,15 @@
 @import "suspension-style.css";
 
 #chart {
-    height: 300px;
+    margin-top: 0.2em;
+    height: 500px;
 }
 
 .tooltip.in {
     opacity: 1;
 }
 
-.slider-group {
+.top-margin {
     margin-top: 2em;
 }
 
@@ -20,4 +21,16 @@
 #canvas {
     margin-top: 1rem;
     position: relative;
+}
+
+#speed-slider-data .slider-selection {
+    background: #17a2b8;
+}
+
+#parameter-slider-data .slider-selection {
+    background: #28a745;
+}
+
+.dropdown-menu.show {
+    z-index: 9999;
 }

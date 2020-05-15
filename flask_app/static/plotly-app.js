@@ -32,32 +32,49 @@ window.plane = {
 // r is current value of r parameter, needed for suspension animation (you might need it as well)
 let r;
 let previousType;
+// more global variables, because why not?
+let data;
+let type;
 
 $(document).ready(function () {
-    let slider = $("input#slider").bootstrapSlider({
+    let parameterSlider = $("input#parameter-slider").bootstrapSlider({
         precision: 2,
-        tooltip: 'always'
+        tooltip: 'always',
+        labeledBy: 'parameter-slider-label'
     });
+    let speedSlider = $("input#speed-slider").bootstrapSlider({
+        precision: 1,
+        tooltip: 'always',
+        labeledBy: 'speed-slider-label'
+    });
+    speedSlider.on('slideStop', e => {
+        if (graphInterval) {
+            changeIntervalSpeed(e.value);
+        }
+    });
+
     options.forEach(option => {
         $('#data-options').append($('<option>', option));
     });
     getApiKey();
     $('#show').on('click', () => {
-        const type = $('#data-options').val();
-        if (type !== '0') {
-            r = slider.bootstrapSlider('getValue');
-            if (type === previousType) {
-                getData(type, r, plotY1, plotY2, false);
-            } else {
-                previousType = type;
-                plotX = 0;
-                getData(type, r, 0, 0, true);
-            }
+        type = $('#data-options').val();
+        r = parameterSlider.bootstrapSlider('getValue');
+        if (type === previousType) {
+            getData(r, plotY1, plotY2, false);
+        } else {
+            previousType = type;
+            plotX = 0;
+            getData(r, 0, 0, true);
         }
+    });
+    $('#show').attr('disabled', true);
+    $('#data-options').change(function () {
+        $('#show').attr('disabled', $(this).val() === null);
     })
 });
 
-function getData(type, value, init1, init2, isNewGraph) {
+function getData(value, init1, init2, isNewGraph) {
     if (graphInterval) {
         stopGraph(isNewGraph);
     }
@@ -77,12 +94,13 @@ function getData(type, value, init1, init2, isNewGraph) {
                     window.plane.currentFlapAngle = response.rear_flap_tilt;
                     break;
             }
+            data = response;
             if (isNewGraph) {
                 // clear canvas
                 $('#canvas').html('');
-                loadAnimationScript(response, type);
+                loadAnimationScript();
             } else {
-                drawGraph(response, type, false);
+                drawGraph(false);
             }
         }).fail(err => console.log('fail: ', err));
 }
@@ -93,37 +111,39 @@ let plotY1;
 let plotY2;
 let i = 0;
 
-function drawGraph(data, type, isNewGraph) {
-    graphInterval = setInterval(() => {
-        // plotly data
-        plotX++;
-        plotY1 = data[Object.keys(data)[0]][i];
-        plotY2 = data[Object.keys(data)[1]][i++];
-        // animacne data
-        switch (type) {
-            case 'ball':
-                break;
-            case 'suspension':
-                updateAnimation(plotY1, plotY2);
-                break;
-            case 'pendulum':
-                window.pendulum.currentPos = window.pendulum.pos[i];
-                window.pendulum.currentTilt = window.pendulum.tilt[i];
-                break;
-            case 'plane':
-                window.plane.currentAngle = window.plane.angles[i];
-                window.plane.currentFlapAngle = window.plane.flapAngles[i];
-                break;
-        }
-        updatePlotly();
-        if (i === data[Object.keys(data)[0]].length) {
-            clearInterval(graphInterval);
-            if (type === 'suspension') {
-                // this stops animation for suspension, pixi probably stops automatically
-                stopAnimation();
+function drawGraph(isNewGraph) {
+    if (interval !== 0) {
+        graphInterval = setInterval(() => {
+            // plotly data
+            plotX++;
+            plotY1 = data[Object.keys(data)[0]][i];
+            plotY2 = data[Object.keys(data)[1]][i++];
+            // animacne data
+            switch (type) {
+                case 'ball':
+                    break;
+                case 'suspension':
+                    updateAnimation(plotY1, plotY2);
+                    break;
+                case 'pendulum':
+                    window.pendulum.currentPos = window.pendulum.pos[i];
+                    window.pendulum.currentTilt = window.pendulum.tilt[i];
+                    break;
+                case 'plane':
+                    window.plane.currentAngle = window.plane.angles[i];
+                    window.plane.currentFlapAngle = window.plane.flapAngles[i];
+                    break;
             }
-        }
-    }, 50);
+            updatePlotly();
+            if (i === data[Object.keys(data)[0]].length) {
+                clearInterval(graphInterval);
+                if (type === 'suspension') {
+                    // this stops animation for suspension, pixi probably stops automatically
+                    stopAnimation();
+                }
+            }
+        }, interval);
+    }
 
     function updatePlotly() {
         Plotly.extendTraces('chart', {
@@ -173,14 +193,14 @@ function stopGraph(isNewGraph) {
  *  separate each animation to its own file to prevent merge conflicts
  *  and to give the app some structure, even when it's for Webte
  */
-function loadAnimationScript(response, type) {
+function loadAnimationScript() {
     if ($('#animation-script')) {
         $('#animation-script').remove();
     }
     const script = document.createElement('script');
     script.onload = () => {
         // draw graph only after script load
-        drawGraph(response, type, true);
+        drawGraph(true);
     };
     script.src = `static/${type}-animation.js`;
     script.id = 'animation-script';
@@ -195,4 +215,18 @@ function getApiKey() {
             sessionStorage.setItem('apiKey', key);
         })
     }
+}
+
+let interval = 75;
+
+function changeIntervalSpeed(value) {
+    clearInterval(graphInterval);
+    if (value === 0) {
+        interval = 0;
+        stopAnimation();
+        return;
+    }
+    interval = parseInt(75 / value);
+    drawGraph(false);
+    updateAnimationSpeed(value);
 }
