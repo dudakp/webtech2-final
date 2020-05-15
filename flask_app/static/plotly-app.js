@@ -47,17 +47,20 @@ $(document).ready(function () {
         if (type !== '0') {
             r = slider.bootstrapSlider('getValue');
             if (type === previousType) {
-                getData(type, r, plotY1, plotY2);
+                getData(type, r, plotY1, plotY2, false);
             } else {
                 previousType = type;
-                getData(type, r, 0, 0);
+                plotX = 0;
+                getData(type, r, 0, 0, true);
             }
         }
     })
 });
 
-function getData(type, value, init1, init2) {
-    if (graphInterval) stopGraph();
+function getData(type, value, init1, init2, isNewGraph) {
+    if (graphInterval) {
+        stopGraph(isNewGraph);
+    }
     $.get(`/api/data/${type}?r=${value}&init1=${init1}&init2=${init2}&key=${sessionStorage.getItem('apiKey')}`,
         response => {
             switch (type) {
@@ -74,9 +77,13 @@ function getData(type, value, init1, init2) {
                     window.plane.currentFlapAngle = response.rear_flap_tilt;
                     break;
             }
-            // clear canvas
-            $('#canvas').html('');
-            loadAnimationScript(response, type);
+            if (isNewGraph) {
+                // clear canvas
+                $('#canvas').html('');
+                loadAnimationScript(response, type);
+            } else {
+                drawGraph(response, type, false);
+            }
         }).fail(err => console.log('fail: ', err));
 }
 
@@ -86,10 +93,10 @@ let plotY1;
 let plotY2;
 let i = 0;
 
-function drawGraph(data, type) {
+function drawGraph(data, type, isNewGraph) {
     graphInterval = setInterval(() => {
         // plotly data
-        plotX = i;
+        plotX++;
         plotY1 = data[Object.keys(data)[0]][i];
         plotY2 = data[Object.keys(data)[1]][i++];
         // animacne data
@@ -116,7 +123,7 @@ function drawGraph(data, type) {
                 stopAnimation();
             }
         }
-    }, 100);
+    }, 50);
 
     function updatePlotly() {
         Plotly.extendTraces('chart', {
@@ -133,27 +140,30 @@ function drawGraph(data, type) {
             [1]);
     }
 
-    Plotly.plot('chart', [
-        {
-            y: [plotY1],
-            type: 'line',
-            name: Object.keys(data)[0]
-        },
-        {
-            y: [plotY2],
-            type: 'line',
-            name: Object.keys(data)[1]
-        }
-    ]);
+    if (isNewGraph) {
+        Plotly.plot('chart', [
+            {
+                y: [plotY1],
+                type: 'line',
+                name: Object.keys(data)[0]
+            },
+            {
+                y: [plotY2],
+                type: 'line',
+                name: Object.keys(data)[1]
+            }
+        ]);
+    }
 }
 
-function stopGraph() {
+function stopGraph(isNewGraph) {
     clearInterval(graphInterval);
-    // Plotly.deleteTraces('chart', [0, 1]);
-    plotX = 0;
     i = 0;
-    // plotY1 = undefined;
-    // plotY2 = undefined;
+    if (isNewGraph) {
+        Plotly.deleteTraces('chart', [0, 1]);
+        plotY1 = undefined;
+        plotY2 = undefined;
+    }
 }
 
 /**
@@ -170,7 +180,7 @@ function loadAnimationScript(response, type) {
     const script = document.createElement('script');
     script.onload = () => {
         // draw graph only after script load
-        drawGraph(response, type);
+        drawGraph(response, type, true);
     };
     script.src = `static/${type}-animation.js`;
     script.id = 'animation-script';

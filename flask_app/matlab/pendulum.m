@@ -19,8 +19,8 @@ function [pos, tilt] = pendulum(r, init1, init2)
     sys = ss(Ac,B*N,C,D);
 
     t = 0:0.05:10;
-    initPozicia=0;
-    initUhol=0;
+    initPozicia=init1;
+    initUhol=init2;
     [y,t,x]=lsim(sys,r*ones(size(t)),t,[initPozicia;0;initUhol;0]);
 
     pos = x(:, 1)

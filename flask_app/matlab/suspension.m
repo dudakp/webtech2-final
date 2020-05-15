@@ -14,9 +14,9 @@ function [car_pos, wheel_pos] = suspension(r, init1, init2)
     sys = ss(Aa-Ba(:,1)*K,Ba,Ca,Da);
 
     t = 0:0.01:5;
-    initX1 = 0;
+    initX1 = init1;
     initX1d = 0;
-    initX2 = 0;
+    initX2 = init2;
     initX2d = 1;
     [y,t,x] = lsim(sys*[0;1],r*ones(size(t)),t,[initX1;initX1d;initX2;initX2d;0]);
 
