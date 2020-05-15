@@ -18,23 +18,33 @@ logger = Logger(mongo.db, 'log')
 @key_required
 def get_octave_data(function_name):
     param_r = request.args.get('r')
-
+    param_init1 = request.args.get('init1')
+    param_init2 = request.args.get('init2')
     try:
         if not param_r:
             return 'Parameter value r is missing', 400
 
         r = float(param_r)
+
+        if not param_init1:
+            param_init1 = 0
+        if not param_init2:
+            param_init2 = 0
+
+        init1 = float(param_init1)
+        init2 = float(param_init2)
+
         mat_lab = MatLab(current_app.config['MATLAB_FORMULAE_PATH'])
         result = None
         try:
             if function_name == 'plane':
-                result = mat_lab.compute_plane_data(r)
+                result = mat_lab.compute_plane_data(r, init1, init2)
             elif function_name == 'ball':
-                result = mat_lab.compute_ball_data(r)
+                result = mat_lab.compute_ball_data(r, init1, init2)
             elif function_name == 'suspension':
-                result = mat_lab.compute_suspension_data(r)
+                result = mat_lab.compute_suspension_data(r, init1, init2)
             elif function_name == 'pendulum':
-                result = mat_lab.compute_pendulum_data(r)
+                result = mat_lab.compute_pendulum_data(r, init1, init2)
             else:
                 return f'Matlab function name {function_name} not found', 400
 

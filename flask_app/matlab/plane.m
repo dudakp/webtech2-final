@@ -1,4 +1,4 @@
-function [plane_tilt, rear_flap_tilt] = plane(r)
+function [plane_tilt, rear_flap_tilt] = plane(r, init1, init2)
     pkg load control
 
     A = [-0.313 56.7 0; -0.0139 -0.426 0; 0 56.7 0];

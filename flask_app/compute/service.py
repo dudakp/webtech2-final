@@ -19,9 +19,9 @@ class MatLab:
         formulae = self.get_formulae_path(formulae_path)
         octave.cd(formulae)
 
-    def compute_plane_data(self, r: float, formulae_path: str = None):
+    def compute_plane_data(self, r: float, init1: float, init2: float, formulae_path: str = None):
         self.switch_formulae_path(formulae_path)
-        plane_tilt, rear_flap_tilt = octave.plane(r, nout=2)
+        plane_tilt, rear_flap_tilt = octave.plane(r, init1, init2, nout=2)
         result = {
             'plane_tilt': plane_tilt.ravel().tolist(),
             'rear_flap_tilt': rear_flap_tilt.ravel().tolist()
@@ -29,9 +29,9 @@ class MatLab:
 
         return result
 
-    def compute_ball_data(self, r: float, formulae_path: str = None):
+    def compute_ball_data(self, r: float, init1: float, init2: float, formulae_path: str = None):
         self.switch_formulae_path(formulae_path)
-        ball_pos, rod_pos = octave.ball(r, nout=2)
+        ball_pos, rod_pos = octave.ball(r, init1, init2, nout=2)
         result = {
             'ball_pos': ball_pos.ravel().tolist(),
             'rod_pos': rod_pos.ravel().tolist()
@@ -39,9 +39,9 @@ class MatLab:
 
         return result
 
-    def compute_suspension_data(self, r: float, formulae_path: str = None):
+    def compute_suspension_data(self, r: float, init1: float, init2: float, formulae_path: str = None):
         self.switch_formulae_path(formulae_path)
-        car_pos, wheel_pos = octave.suspension(r, nout=2)
+        car_pos, wheel_pos = octave.suspension(r, init1, init2, nout=2)
         result = {
             'car_pos': car_pos.ravel().tolist(),
             'wheel_pos': wheel_pos.ravel().tolist()
@@ -49,9 +49,9 @@ class MatLab:
 
         return result
 
-    def compute_pendulum_data(self, r: float, formulae_path: str = None):
+    def compute_pendulum_data(self, r: float, init1: float, init2: float, formulae_path: str = None):
         self.switch_formulae_path(formulae_path)
-        pos, tilt = octave.pendulum(r, nout=2)
+        pos, tilt = octave.pendulum(r, init1, init2, nout=2)
         result = {
             'pos': pos.ravel().tolist(),
             'tilt': tilt.ravel().tolist()

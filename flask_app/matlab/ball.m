@@ -1,4 +1,4 @@
-function [ball_pos, rod_pos] = ball(r)
+function [ball_pos, rod_pos] = ball(r, init1, init2)
     pkg load control
 
     m = 0.111;

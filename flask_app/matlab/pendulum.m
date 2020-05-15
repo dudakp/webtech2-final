@@ -1,4 +1,4 @@
-function [pos, tilt] = pendulum(r)
+function [pos, tilt] = pendulum(r, init1, init2)
     pkg load control
 
     M = .5;

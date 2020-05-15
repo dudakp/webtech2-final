@@ -31,9 +31,9 @@ window.plane = {
 
 // r is current value of r parameter, needed for suspension animation (you might need it as well)
 let r;
+let previousType;
 
 $(document).ready(function () {
-    // todo what range should the slider have? do we allow negative numbers for all animations / for some (suspension)
     let slider = $("input#slider").bootstrapSlider({
         precision: 2,
         tooltip: 'always'
@@ -46,14 +46,19 @@ $(document).ready(function () {
         const type = $('#data-options').val();
         if (type !== '0') {
             r = slider.bootstrapSlider('getValue');
-            getData(type, r);
+            if (type === previousType) {
+                getData(type, r, plotY1, plotY2);
+            } else {
+                previousType = type;
+                getData(type, r, 0, 0);
+            }
         }
     })
 });
 
-function getData(type, value) {
+function getData(type, value, init1, init2) {
     if (graphInterval) stopGraph();
-    $.get(`/api/data/${type}?r=${value}&key=${sessionStorage.getItem('apiKey')}`,
+    $.get(`/api/data/${type}?r=${value}&init1=${init1}&init2=${init2}&key=${sessionStorage.getItem('apiKey')}`,
         response => {
             switch (type) {
                 case 'ball':
@@ -111,7 +116,7 @@ function drawGraph(data, type) {
                 stopAnimation();
             }
         }
-    }, 50);
+    }, 100);
 
     function updatePlotly() {
         Plotly.extendTraces('chart', {
@@ -144,11 +149,11 @@ function drawGraph(data, type) {
 
 function stopGraph() {
     clearInterval(graphInterval);
-    Plotly.deleteTraces('chart', [0, 1]);
+    // Plotly.deleteTraces('chart', [0, 1]);
     plotX = 0;
     i = 0;
-    plotY1 = undefined;
-    plotY2 = undefined;
+    // plotY1 = undefined;
+    // plotY2 = undefined;
 }
 
 /**
