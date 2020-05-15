@@ -13,16 +13,8 @@ window.ball = {
     currentFlapAngle: 0
 };
 
-window.suspension = {
-    src: 'http://getdrawings.com/image/step-by-step-airplane-drawing-57.jpg',
-    angles: [],
-    flapAngles: [],
-    currentAngle: 0,
-    currentFlapAngle: 0
-};
-
 window.pendulum = {
-    src: 'static/obdlznik.png',
+    src: 'static/assets/pendulum/obdlznik.png',
     pos: [],
     tilt: [],
     currentPos: 0,
@@ -30,14 +22,18 @@ window.pendulum = {
 };
 
 window.plane = {
-    src: 'static/plane.png',
+    src: 'static/assets/plane/plane.png',
     angles: [],
     flapAngles: [],
     currentAngle: 0,
     currentFlapAngle: 0
 };
 
+// r is current value of r parameter, needed for suspension animation (you might need it as well)
+let r;
+
 $(document).ready(function () {
+    // todo what range should the slider have? do we allow negative numbers for all animations / for some (suspension)
     let slider = $("input#slider").bootstrapSlider({
         precision: 2,
         tooltip: 'always'
@@ -49,7 +45,8 @@ $(document).ready(function () {
     $('#show').on('click', () => {
         const type = $('#data-options').val();
         if (type !== '0') {
-            getData(type, slider.bootstrapSlider('getValue'));
+            r = slider.bootstrapSlider('getValue');
+            getData(type, r);
         }
     })
 });
@@ -72,8 +69,9 @@ function getData(type, value) {
                     window.plane.currentFlapAngle = response.rear_flap_tilt;
                     break;
             }
-            drawGraph(response, type);
-            loadAnimationScript(type);
+            // clear canvas
+            $('#canvas').html('');
+            loadAnimationScript(response, type);
         }).fail(err => console.log('fail: ', err));
 }
 
@@ -89,12 +87,12 @@ function drawGraph(data, type) {
         plotX = i;
         plotY1 = data[Object.keys(data)[0]][i];
         plotY2 = data[Object.keys(data)[1]][i++];
-
         // animacne data
         switch (type) {
             case 'ball':
                 break;
             case 'suspension':
+                updateAnimation(plotY1, plotY2);
                 break;
             case 'pendulum':
                 window.pendulum.currentPos = window.pendulum.pos[i];
@@ -106,8 +104,14 @@ function drawGraph(data, type) {
                 break;
         }
         updatePlotly();
-        if (i === data[Object.keys(data)[0]].length) clearInterval(graphInterval);
-    }, 100);
+        if (i === data[Object.keys(data)[0]].length) {
+            clearInterval(graphInterval);
+            if (type === 'suspension') {
+                // this stops animation for suspension, pixi probably stops automatically
+                stopAnimation();
+            }
+        }
+    }, 50);
 
     function updatePlotly() {
         Plotly.extendTraces('chart', {
@@ -147,13 +151,21 @@ function stopGraph() {
     plotY2 = undefined;
 }
 
-function loadAnimationScript(type) {
+/**
+ * Loads script with current animation
+ *
+ *  I don't really care if its 5 lines of code or not,
+ *  separate each animation to its own file to prevent merge conflicts
+ *  and to give the app some structure, even when it's for Webte
+ */
+function loadAnimationScript(response, type) {
     if ($('#animation-script')) {
         $('#animation-script').remove();
     }
     const script = document.createElement('script');
     script.onload = () => {
-        //do stuff with the script
+        // draw graph only after script load
+        drawGraph(response, type);
     };
     script.src = `static/${type}-animation.js`;
     script.id = 'animation-script';

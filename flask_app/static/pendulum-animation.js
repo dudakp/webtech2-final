@@ -24,23 +24,15 @@ $(document).ready(() => {
     pendulumSprite.x = window.app.screen.width / 2;
     pendulumSprite.y = window.app.screen.height;
 
-
-    // window.createPlaneSprite = () => {
-    //     // window.app.destroy();
-    //     window.app.stage.addChild(planeSprite);
-    // };
-
     window.createPendulumSprite = () => {
         window.app.stage.addChild(pendulumSprite)
     };
 
-
+    createPendulumSprite();
     // Listen for animate update
-    // window.app.ticker.add((delta) => {
-    //     // just for fun, let's rotate mr rabbit a little
-    //     // delta is 1 if running at 100% performance
-    //     // creates frame-independent transformation
-    //     planeSprite.rotation = -window.plane.currentAngle;
-    //
-    // });
+    window.app.ticker.add((delta) => {
+        // just for fun, let's rotate mr rabbit a little
+        // delta is 1 if running at 100% performance
+        // creates frame-independent transformation
+    });
 });

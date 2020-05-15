@@ -1,0 +1,92 @@
+#canvas .background {
+    height: 100%;
+    width: 100%;
+    background-image: url('.././assets/suspension/background.jpg');
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    overflow-x: hidden;
+}
+
+.road {
+    height: 100px;
+    width: 500%;
+    display: block;
+    background-image: url('.././assets/suspension/road.jpg');
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1;
+    background-repeat: repeat-x;
+    animation: road 5s linear infinite;
+}
+
+@keyframes road {
+    100% {
+        transform: translateX(-2400px);
+    }
+}
+
+.city {
+    height: 110px;
+    width: 500%;
+    background-image: url('.././assets/suspension/city.png');
+    position: absolute;
+    bottom: 100px;
+    left: 0;
+    right: 0;
+    display: block;
+    z-index: 1;
+    background-repeat: repeat-x;
+    animation: city 5s linear infinite;
+}
+
+@keyframes city {
+    100% {
+        transform: translateX(-400px);
+    }
+}
+
+.car {
+    width: 300px;
+    left: 50%;
+    bottom: 14px;
+    transform: translateX(-50%);
+    position: absolute;
+    z-index: 2;
+}
+
+.car img {
+    width: 100%;
+}
+
+.wheels {
+    left: 50%;
+    bottom: 81px;
+    transform: translateX(-50%);
+    position: absolute;
+    z-index: 2;
+}
+
+.wheels img {
+    width: 45px;
+    height: 45px;
+    animation: wheel 1s linear infinite;
+}
+
+@keyframes wheel {
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.back-wheel {
+    left: -97px;
+    position: absolute;
+}
+
+.front-wheel {
+    left: 54px;
+    position: absolute;
+}
