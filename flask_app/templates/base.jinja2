@@ -35,38 +35,22 @@
         <div class="btn-group">
             <button class="btn btn-light btn-sm btn-dropdown" type="button" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">
-            {{ CURRENT_LANGUAGE }}
-                {% if CURRENT_LANGUAGE == 'sk' %}
-                    <img style="width: 1rem" src="../static/assets/images/SK.svg"
-                         alt="sk_flag"> </a>
-                {% else %}
-                    <img style="width: 1rem" src="../static/assets/images/US.svg"
-                         alt="sk_flag"> </a>
-                {% endif %}
+                {{ CURRENT_LANGUAGE }}
+                <img style="width: 1rem" src="../static/assets/images/{{ CURRENT_LANGUAGE }}.svg"
+                     alt="{{ CURRENT_LANGUAGE }} flag">
             </button>
             <div class="dropdown-menu">
-                {# hehe, dirty shit ako keby to pisal prvak #}
+                {# hehe, dirty shit ako keby to pisal prvak tu nebudeme tolerovat#}
                 {% for language in AVAILABLE_LANGUAGES.items() %}
                     {% if CURRENT_LANGUAGE == language[0] %}
-                        <a href="{{ url_for('user.set_language', language=language[0]) }}"
-                           class="dropdown-item">{{ language[1] }}
-                            {% if language[1] == 'Slovak' %}
-                                <img style="width: 1rem" src="../static/assets/images/SK.svg"
-                                     alt="sk_flag"> </a>
-                            {% else %}
-                                <img style="width: 1rem" src="../static/assets/images/US.svg"
-                                     alt="sk_flag"> </a>
-                            {% endif %}
+                        <span class="dropdown-item">{{ language[1] }}
+                        <img style="width: 1rem" src="../static/assets/images/{{ CURRENT_LANGUAGE }}.svg"
+                             alt="{{ CURRENT_LANGUAGE }} flag"> </span>
                     {% else %}
                         <a href="{{ url_for('user.set_language', language=language[0]) }}"
                            class="dropdown-item">{{ language[1] }}
-                            {% if language[1] == 'Slovak' %}
-                                <img style="width: 1rem" src="../static/assets/images/SK.svg"
-                                     alt="sk_flag"> </a>
-                            {% else %}
-                                <img style="width: 1rem" src="../static/assets/images/US.svg"
-                                     alt="sk_flag"> </a>
-                            {% endif %}
+                        <img style="width: 1rem" src="../static/assets/images/{{ CURRENT_LANGUAGE }}.svg"
+                             alt="{{ CURRENT_LANGUAGE }} flag"> </a>
                     {% endif %}
                 {% endfor %}
             </div>
