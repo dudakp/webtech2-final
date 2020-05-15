@@ -15,23 +15,70 @@
 </head>
 
 <body>
+<x></x>
+
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="/">WEBTE2 octave proxy</a>
-    <form action="/logout" method="post">
-        <input type="submit" class="btn btn-info btn-md" value="Odhlásiť sa">
-    </form>
+    <a class="navbar-brand" href="#">WEBTE2 octavia proxy</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
-    {% for language in AVAILABLE_LANGUAGES.items() %}
-        {% if CURRENT_LANGUAGE == language[0] %}
-            {{ language[1] }}
-        {% else %}
-            <a href="{{ url_for('user.set_language', language=language[0]) }}">{{ language[1] }}</a>
-        {% endif %}
-    {% endfor %}
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="#">Simulacie <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Octave terminal</a>
+            </li>
+        </ul>
+        <div class="btn-group">
+            <button class="btn btn-light btn-sm btn-dropdown" type="button" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+            {{ CURRENT_LANGUAGE }}
+                {% if CURRENT_LANGUAGE == 'sk' %}
+                    <img style="width: 1rem" src="../static/assets/images/SK.svg"
+                         alt="sk_flag"> </a>
+                {% else %}
+                    <img style="width: 1rem" src="../static/assets/images/US.svg"
+                         alt="sk_flag"> </a>
+                {% endif %}
+            </button>
+            <div class="dropdown-menu">
+                {# hehe, dirty shit ako keby to pisal prvak #}
+                {% for language in AVAILABLE_LANGUAGES.items() %}
+                    {% if CURRENT_LANGUAGE == language[0] %}
+                        <a href="{{ url_for('user.set_language', language=language[0]) }}"
+                           class="dropdown-item">{{ language[1] }}
+                            {% if language[1] == 'Slovak' %}
+                                <img style="width: 1rem" src="../static/assets/images/SK.svg"
+                                     alt="sk_flag"> </a>
+                            {% else %}
+                                <img style="width: 1rem" src="../static/assets/images/US.svg"
+                                     alt="sk_flag"> </a>
+                            {% endif %}
+                    {% else %}
+                        <a href="{{ url_for('user.set_language', language=language[0]) }}"
+                           class="dropdown-item">{{ language[1] }}
+                            {% if language[1] == 'Slovak' %}
+                                <img style="width: 1rem" src="../static/assets/images/SK.svg"
+                                     alt="sk_flag"> </a>
+                            {% else %}
+                                <img style="width: 1rem" src="../static/assets/images/US.svg"
+                                     alt="sk_flag"> </a>
+                            {% endif %}
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">API dokumentacia</button>
+        <form class="form-inline my-2 my-lg-0" action="/logout" method="post">
+            <input type="submit" class="btn btn-info btn-md" value="Odhlásiť sa">
+        </form>
+    </div>
 </nav>
+
 <div id="content">
     {% block content %}
     {% endblock %}
