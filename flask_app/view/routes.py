@@ -8,3 +8,9 @@ view = Blueprint('view', __name__)
 @login_required
 def profile():
     return render_template('index.jinja2')
+
+
+@view.route('/terminal')
+@login_required
+def console():
+    return render_template('terminal.jinja2')
