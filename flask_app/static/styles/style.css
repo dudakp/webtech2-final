@@ -34,3 +34,42 @@
 .dropdown-menu.show {
     z-index: 9999;
 }
+
+
+.center {
+    text-align: center;
+}
+
+.terminal-wrapper {
+    background: #000;
+    border: 3px groove #ccc;
+    color: #ccc;
+    display: inline-block;
+    width: 100%;
+    max-width: 90ch;
+    height: 75vh;
+    text-align: start;
+    word-wrap: break-word;
+    border-collapse: collapse;
+    padding: 5px;
+    overflow-y: scroll;
+}
+
+.terminal-output {
+    width: 100%;
+}
+
+.terminal-input {
+    background: black;
+    border: none;
+    color: white;
+    width: 33em;
+}
+
+.terminal-input:focus {
+    outline: none;
+}
+
+.command-prefix {
+    color: #28a745;
+}

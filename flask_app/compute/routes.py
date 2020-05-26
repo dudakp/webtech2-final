@@ -57,11 +57,10 @@ def get_octave_data(function_name):
         return jsonify(result)
 
 
-@compute.route('/api/cli', methods=['GET'])
+@compute.route('/api/cli', methods=['POST'])
 @key_required
 def octave_cli():
     commands = request.data
-
     if commands:
         try:
             result = str(MatLab.use_cli(commands.decode('utf-8')))
