@@ -12,6 +12,8 @@ const setActiveNavLink = () => {
     let activeLink;
     const srCurrent = '<span class="sr-only">(current)</span>';
     if (window.location.pathname === '/terminal') {
+        // todo remove if this is ever fixed
+        showXSSWarning();
         activeLink = $('.nav-link:last');
     } else {
         activeLink = $('.nav-link:first');
@@ -116,7 +118,14 @@ function getCommand(position) {
             currentCommandPos = -1;
             return '';
         }
-        return saved[saved.length -1 - position];
+        return saved[saved.length - 1 - position];
     }
     return '';
+}
+
+function showXSSWarning() {
+    $("#dialog").dialog({
+        autoOpen: false
+    });
+    $('#dialog').dialog('open');
 }
