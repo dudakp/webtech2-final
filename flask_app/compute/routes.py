@@ -68,7 +68,7 @@ def octave_cli():
             return result
         except Oct2PyError as e:
             logger.log(commands.decode('utf-8'), datetime.utcnow(), 'ERROR', str(e))
-            return 'Invalid statement(s)', 400
+            return str(e), 400
     else:
         return 'No commands inserted in body', 400
 

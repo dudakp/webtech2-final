@@ -61,4 +61,4 @@ class MatLab:
 
     @staticmethod
     def use_cli(commands: str):
-        return octave.eval(commands)
+        return octave.evalc(commands)

@@ -57,6 +57,7 @@
 
 .terminal-output {
     width: 100%;
+    white-space: pre;
 }
 
 .terminal-input {
@@ -72,4 +73,8 @@
 
 .command-prefix {
     color: #28a745;
+}
+
+.error-log {
+    color: red;
 }

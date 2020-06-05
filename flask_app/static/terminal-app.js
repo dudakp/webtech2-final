@@ -33,11 +33,10 @@ $('#command-form').on('submit', e => {
     $.ajax({
         url: `/api/cli?key=${sessionStorage.getItem('apiKey')}`,
         type: 'POST',
-        contentType: "application/json; charset=utf-8",
-        data: JSON.stringify(commandInput.val()),
-        success: logResponse,
-        error: e => console.log('error: ', e),
-
+        contentType: "text/plain",
+        data: commandInput.val(),
+        success: (response) => logResponse(response),
+        error: e => logResponse(e.responseText, true),
     });
 });
 
@@ -54,11 +53,19 @@ function createUserPrefix() {
     })
 }
 
-function logResponse(response) {
-    console.log('what the fukk are those answers? ', response);
+function logResponse(response, isError) {
     saveCommand(commandInput.val());
     terminalOutput += prefixElem[0].outerHTML + ' ' + htmlEncode(commandInput.val()) + '<br/>';
-    terminalOutput += '> ' + response + '<br/>';
+
+    // to keep consistent line breaks, some commands return them, some don't
+    if (!response.endsWith('\n')) {
+        response += '\n';
+    }
+    if (isError) {
+        terminalOutput += '> <span class="error-log">' + response + "</span>";
+    } else {
+        terminalOutput += '> ' + response;
+    }
     $('.terminal-output').html(terminalOutput);
     commandInput.val('');
     commandInput[0].scrollIntoView();
