@@ -87,3 +87,11 @@ def pdf_export():
     exporter = DBExporter(mongo.db, 'log')
     exporter.all_to_pdf()
     return send_file(str(Path(__file__).parent.absolute()) + '/../static/export.pdf', 'export.pdf')
+
+
+# @compute.route('/api/export/stat', methods=['GET'])
+# @key_required
+# def stat_export():
+#     exporter = DBExporter(mongo.db, 'log')
+#     return exporter.compute_stats()
+#     # return send_file(str(Path(__file__).parent.absolute()) + '/../static/stat.pdf', 'stat.pdf')

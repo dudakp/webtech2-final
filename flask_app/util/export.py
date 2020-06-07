@@ -26,3 +26,10 @@ class DBExporter(metaclass=Singleton):
         self.all_to_html()
         pdfkit.from_file(root + '/../static/export.html', root + '/../static/export.pdf')
 
+    def compute_stats(self):
+        df = pd.DataFrame(list(self.db.find({})))
+        del df['_id']
+        del df['timestamp']
+        del df['result']
+        del df['info']
+        return df.groupby('command').command.count().to_dict()

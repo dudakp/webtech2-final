@@ -1,0 +1,28 @@
+{% extends "base.jinja2" %}
+
+{% block title %}Octavia simulation | {% endblock %}
+{% block head %}
+    {{ super() }}
+{% endblock %}
+
+{% block content %}
+    <div class="container">
+        <table class="table">
+            <thead>
+            <tr>
+                <th scope="col">Command</th>
+                <th scope="col">Calls</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for k, v in stats|dictsort(by='value', reverse=True) %}
+                <tr>
+                    <th>{{ k }}</th>
+                    <td>{{ v }}</td>
+                </tr>
+            {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

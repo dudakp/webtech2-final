@@ -39,6 +39,10 @@
                 <img style="width: 1rem" src="../static/assets/images/{{ CURRENT_LANGUAGE }}.svg"
                      alt="{{ CURRENT_LANGUAGE }} flag">
             </button>
+            <button class="btn btn-light" type="button"
+                    aria-haspopup="true" aria-expanded="false" >
+                <a href="stats"> Display and send stats </a>
+            </button>
             <div class="dropdown-menu">
                 {# hehe, dirty shit ako keby to pisal prvak tu nebudeme tolerovat#}
                 {% for language in AVAILABLE_LANGUAGES.items() %}
@@ -84,6 +88,7 @@
 <script src="{{ url_for('static', filename='node_modules/pixi.js/dist/pixi.js') }}"></script>
 <script src="{{ url_for('static', filename='./plotly-app.js') }}"></script>
 <script src="{{ url_for('static', filename='./terminal-app.js') }}"></script>
+<script src="{{ url_for('static', filename='./main.js') }}"></script>
 </body>
 
 </html>
