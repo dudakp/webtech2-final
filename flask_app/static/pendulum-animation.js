@@ -24,9 +24,7 @@ $(document).ready(() => {
     pendulumSprite.x = window.app.screen.width / 2;
     pendulumSprite.y = window.app.screen.height;
 
-    window.createPendulumSprite = () => {
-        window.app.stage.addChild(pendulumSprite)
-    };
+    window.createPendulumSprite = () => window.app.stage.addChild(pendulumSprite);
 
     createPendulumSprite();
     // Listen for animate update
@@ -34,5 +32,7 @@ $(document).ready(() => {
         // just for fun, let's rotate mr rabbit a little
         // delta is 1 if running at 100% performance
         // creates frame-independent transformation
+
+        pendulumSprite.x = window.pendulum.currentPos * 500 + 30;
     });
 });
