@@ -24,6 +24,7 @@ window.pendulum = {
 
 window.plane = {
     src: 'static/assets/plane/plane.png',
+    flapSrc: 'static/assets/plane/rear_flap.png',
     angles: [],
     flapAngles: [],
     currentAngle: 0,
@@ -92,7 +93,7 @@ function getData(value, init1, init2, isNewGraph) {
                     break;
                 case 'plane':
                     window.plane.angles = response.plane_tilt;
-                    window.plane.currentFlapAngle = response.rear_flap_tilt;
+                    window.plane.flapAngles = response.rear_flap_tilt;
                     break;
             }
             data = response;

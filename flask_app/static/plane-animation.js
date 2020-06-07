@@ -12,35 +12,27 @@ $(document).ready(() => {
 
 
     const planeSprite = PIXI.Sprite.from(window.plane.src);
-    // center the sprite's anchor point
-    planeSprite.anchor.set(0.5);
-    // move the sprite to the center of the screen
-    planeSprite.x = window.app.screen.width / 2;
-    planeSprite.y = window.app.screen.height / 2;
+    const flapSprite = PIXI.Sprite.from(window.plane.flapSrc);
 
-    // const pendulumSprite = PIXI.Sprite.from(window.pendulum.src);
-    //
-    // pendulumSprite.anchor.set(0.5);
-    // pendulumSprite.x = window.app.screen.width / 2;
-    // pendulumSprite.y = window.app.screen.height;
+    flapSprite.scale.set(1.25, 1.25);
+    planeSprite.anchor.set(0.5);
+    flapSprite.anchor.set(0.5);
+    planeSprite.x = window.app.screen.width / 2;
+    planeSprite.y = window.app.screen.height / 3;
+
+    flapSprite.x = window.app.screen.width / 2;
+    flapSprite.y = window.app.screen.height / 2;
 
 
     window.createPlaneSprite = () => {
-        // window.app.destroy();
         window.app.stage.addChild(planeSprite);
+        window.app.stage.addChild(flapSprite);
     };
 
-    // window.createPendulumSprite = () => {
-    //     window.app.stage.addChild(pendulumSprite)
-    // };
 
     createPlaneSprite();
-    // Listen for animate update
     window.app.ticker.add((delta) => {
-        // just for fun, let's rotate mr rabbit a little
-        // delta is 1 if running at 100% performance
-        // creates frame-independent transformation
         planeSprite.rotation = -window.plane.currentAngle;
-
+        flapSprite.rotation = -window.plane.currentFlapAngle;
     });
 });
