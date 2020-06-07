@@ -2,7 +2,7 @@ import json
 import os
 import pathlib
 
-from flask import Flask, request, session
+from flask import Flask, request, session, send_from_directory
 from flask_babel import Babel
 from flask_bcrypt import Bcrypt
 from flask_cors import CORS
@@ -65,3 +65,10 @@ def inject_conf_var():
     return dict(
         AVAILABLE_LANGUAGES=config['LANGUAGES'],
         CURRENT_LANGUAGE=session.get('language', request.accept_languages.best_match(config['LANGUAGES'].keys())))
+
+
+@app.route('/favicon.ico')
+def favicon():
+    return send_from_directory(os.path.join(app.root_path, 'static'),
+                               'favicon.ico', mimetype='image/vnd.microsoft.icon')
+
