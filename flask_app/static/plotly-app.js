@@ -15,6 +15,7 @@ window.ball = {
 
 window.pendulum = {
     src: 'static/assets/pendulum/obdlznik.png',
+    srcPerpendicular: 'static/assets/pendulum/obdlznik_kolmy.png',
     pos: [],
     tilt: [],
     currentPos: 0,
