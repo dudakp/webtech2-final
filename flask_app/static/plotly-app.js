@@ -4,13 +4,16 @@ const options = [
     {value: 'pendulum', text: 'Inverted Pendulum'},
     {value: 'plane', text: 'Aircraft Pitch'},
 ];
+window.bar = {
+    src: 'static/assets/ball/tyc.png',
+    tilt:[],
+    currentTilt:[],
+};
 
 window.ball = {
-    src: 'http://getdrawings.com/image/step-by-step-airplane-drawing-57.jpg',
-    angles: [],
-    flapAngles: [],
-    currentAngle: 0,
-    currentFlapAngle: 0
+    src: 'static/assets/ball/ballfinal.png',
+    position:[],
+    currentPosition:[]
 };
 
 window.pendulum = {
@@ -84,6 +87,8 @@ function getData(value, init1, init2, isNewGraph) {
         response => {
             switch (type) {
                 case 'ball':
+                    window.ball.position=response.ball_pos;
+                    window.bar.tilt = response.rod_pos;
                     break;
                 case 'suspension':
                     break;
@@ -123,6 +128,8 @@ function drawGraph(isNewGraph) {
             // animacne data
             switch (type) {
                 case 'ball':
+                    window.ball.currentPosition=window.ball.position[i];
+                    window.bar.currentTilt = window.bar.tilt[i];
                     break;
                 case 'suspension':
                     updateAnimation(plotY1, plotY2);

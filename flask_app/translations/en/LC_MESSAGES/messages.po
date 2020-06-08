@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2020-05-01 21:07+0200\n"
-"PO-Revision-Date: 2020-05-01 21:10+0200\n"
+"POT-Creation-Date: 2020-05-27 21:49+0200\n"
+"PO-Revision-Date: 2020-06-07 19:39+0200\n"
 "Language: en\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
@@ -17,12 +17,64 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.8.0\n"
 "Last-Translator: \n"
-"X-Generator: Poedit 2.2.4\n"
+"X-Generator: Poedit 2.3.1\n"
 
-#: templates/index.jinja2:26
-msgid "Vyber si pekne ktore data chces zobrazit"
-msgstr "Choose what data you want to display, bitch"
+#: templates/base.jinja2:13
+msgid "WebTech2 Finálne Zadanie"
+msgstr "WebTech2 Final  Assignment"
 
-#: templates/index.jinja2:34
+#: templates/base.jinja2:20
+msgid "WEBTE2 octavia proxy"
+msgstr "WEBTE2 octavia proxy"
+
+#: templates/base.jinja2:29
+msgid "Simulácie"
+msgstr "Simulations"
+
+#: templates/base.jinja2:32
+msgid "Octave terminál"
+msgstr "Octave terminal"
+
+#: templates/base.jinja2:58
+msgid "API dokumentácia"
+msgstr "API documentation"
+
+#: templates/base.jinja2:60
+msgid "Odhlásiť sa"
+msgstr "LogOut"
+
+#: templates/formBase.jinja2:10
+msgid "WebTech2 Finalné Zadanie"
+msgstr "WebTech2 Final Assignment"
+
+#: templates/index.jinja2:16
+msgid "Vyber si graf ktoré chces zobrazit"
+msgstr "Choose a graph to show"
+
+#: templates/index.jinja2:32
 msgid "Zobraz graf"
 msgstr "Show graph"
+
+#: templates/login.jinja2:5
+msgid "Prihlásenie"
+msgstr "Login"
+
+#: templates/login.jinja2:33
+msgid "Prihlásiť sa"
+msgstr "LogIn"
+
+#: templates/login.jinja2:34
+msgid "Ešte nemáte účet?"
+msgstr "Doesn't have an account?"
+
+#: templates/register.jinja2:5
+msgid "Registrácia"
+msgstr "Registration"
+
+#: templates/register.jinja2:73
+msgid "Vytvoriť účet"
+msgstr "Create account"
+
+#: templates/register.jinja2:74
+msgid "Už máte účet?"
+msgstr "Already have an account?"

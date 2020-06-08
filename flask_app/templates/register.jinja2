@@ -2,7 +2,7 @@
 
 {% block content %}
     <form id="login-form" class="form" action="" method="post">
-        <h3 class="text-center text-info">Registrácia</h3>
+        <h3 class="text-center text-info">{{ _('Registrácia') }}</h3>
         <div class="form-group">
             {{ form.username.label(class_="text-info") }}
             {{ form.username(class_="form-control") }}
@@ -70,8 +70,8 @@
             {% endif %}
         </div>
         <div class="form-group d-flex pt-2 pb-2 link-container">
-            <input type="submit" name="submit" class="btn btn-info btn-md" value="Vytvoriť účet">
-            <a href="/login" class="text-info link">Už máte účet?</a>
+            <input type="submit" name="submit" class="btn btn-info btn-md" value={{ _('Vytvoriť účet') }}>
+            <a href="/login" class="text-info link">{{_('Už máte účet?')}}</a>
         </div>
     </form>
 
