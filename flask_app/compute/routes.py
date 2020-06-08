@@ -1,7 +1,7 @@
-import os
 from pathlib import Path
 
 from flask import Blueprint, request, jsonify, current_app, send_file, render_template
+from flask_babel import gettext
 from oct2py import Oct2PyError
 from datetime import datetime
 from flask_mail import Message
@@ -106,7 +106,7 @@ def send_mail():
     csv = request.args.get('csv') == 'true'
 
     exporter = DBExporter(mongo.db, 'log')
-    msg = Message(subject='Statistics export from Octavia Proxy',
+    msg = Message(subject=gettext(u'Export štatistík z aplikácie Octavia Proxy'),
                   recipients=[recipient])
     root = str(Path(__file__).parent.absolute())
     msg.html = render_template('email-template.html')
