@@ -13,13 +13,13 @@ $(document).ready(() => {
 
     const ballSprite = PIXI.Sprite.from(window.ball.src);
     ballSprite.anchor.set(0.5);
-    ballSprite.x = window.app.screen.width / 2;
+    ballSprite.x = window.app.screen.width / 2 ;
     ballSprite.y = window.app.screen.height / 2 + 70;
 
     const barSprite = PIXI.Sprite.from(window.bar.src);
     barSprite.anchor.set(0.5);
     barSprite.x = window.app.screen.width / 2;
-    barSprite.y = (window.app.screen.height /2)+100;
+    barSprite.y = (window.app.screen.height / 2)+100;
 
 
 
@@ -38,7 +38,7 @@ $(document).ready(() => {
     createBarSprite();
 
     window.app.ticker.add((delta) => {
-       ballSprite.x = 250+ window.ball.currentPosition*100;
+       ballSprite.x = 280+ window.ball.currentPosition*100;
        // ballSprite.y = window.ball.currentPosition*1000;
 
        barSprite.rotation = window.bar.currentTilt*100;

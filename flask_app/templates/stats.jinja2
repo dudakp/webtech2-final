@@ -32,16 +32,16 @@
             </div>
         </form>
 
-        <h1>Celkovo volani: {{ stats[2] }}</h1>
-        <h2>uspesnych: {{ stats[1]['SUCCESS'] }}</h2>
-        <h2>neuspesnych: {{ stats[1]['ERROR'] }}</h2>
-        <table class="table">
-            <thead>
-            <tr>
-                <th scope="col">Command</th>
-                <th scope="col">Calls</th>
-            </tr>
-            </thead>
+        <h1>{{ _('Celkovo volaní :') }} {{ stats[2] }}</h1>
+        <h2>{{ _('Úspešných :') }} {{ stats[1]['SUCCESS'] }}</h2>
+        <h2>{{ _('Neúspešných:') }} {{ stats[1]['ERROR'] }}</h2>
+            <table class="table">
+                <thead>
+                    <tr>
+                    <th scope="col">{{ _('Príkaz') }}</th>
+                    <th scope="col">{{ _('Volanie') }}</th>
+                    </tr>
+                </thead>
             <tbody>
             {% for k, v in stats[0]|dictsort(by='value', reverse=True) %}
                 <tr>

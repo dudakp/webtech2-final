@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2020-05-27 21:49+0200\n"
-"PO-Revision-Date: 2020-06-07 19:39+0200\n"
+"POT-Creation-Date: 2020-06-08 19:23+0200\n"
+"PO-Revision-Date: 2020-06-08 19:27+0200\n"
 "Language: en\n"
 "Language-Team: en <LL@li.org>\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
@@ -21,11 +21,11 @@ msgstr ""
 
 #: templates/base.jinja2:13
 msgid "WebTech2 Finálne Zadanie"
-msgstr "WebTech2 Final  Assignment"
+msgstr "WebTech2 Final Assignment"
 
 #: templates/base.jinja2:20
-msgid "WEBTE2 octavia proxy"
-msgstr "WEBTE2 octavia proxy"
+msgid "WEBTE2 Octavia Proxy"
+msgstr "WEBTE2 Octavia Proxy"
 
 #: templates/base.jinja2:29
 msgid "Simulácie"
@@ -35,11 +35,15 @@ msgstr "Simulations"
 msgid "Octave terminál"
 msgstr "Octave terminal"
 
-#: templates/base.jinja2:58
+#: templates/base.jinja2:44
+msgid "Zobraz a pošli štaty"
+msgstr "Show and send stats"
+
+#: templates/base.jinja2:62
 msgid "API dokumentácia"
 msgstr "API documentation"
 
-#: templates/base.jinja2:60
+#: templates/base.jinja2:64
 msgid "Odhlásiť sa"
 msgstr "LogOut"
 
@@ -47,9 +51,13 @@ msgstr "LogOut"
 msgid "WebTech2 Finalné Zadanie"
 msgstr "WebTech2 Final Assignment"
 
+#: templates/formBase.jinja2:16
+msgid "Octavia proxy"
+msgstr "Octavia proxy"
+
 #: templates/index.jinja2:16
-msgid "Vyber si graf ktoré chces zobrazit"
-msgstr "Choose a graph to show"
+msgid "Vyber si graf :"
+msgstr "Choose graph :"
 
 #: templates/index.jinja2:32
 msgid "Zobraz graf"
@@ -78,3 +86,38 @@ msgstr "Create account"
 #: templates/register.jinja2:74
 msgid "Už máte účet?"
 msgstr "Already have an account?"
+
+#: templates/stats.jinja2:10
+msgid "Celkovo volaní :"
+msgstr "Number of calls :"
+
+#: templates/stats.jinja2:11
+msgid "Úspešných :"
+msgstr "Successful :"
+
+#: templates/stats.jinja2:12
+msgid "Neúspešných:"
+msgstr "Failed:"
+
+#: templates/stats.jinja2:16
+msgid "Príkaz"
+msgstr "Command"
+
+#: templates/stats.jinja2:17
+msgid "Volanie"
+msgstr "Calls"
+
+#: templates/terminal.jinja2:22
+msgid "Na stránke sa práve pracuje, používanie stránky je na vlastnú zodpovednosť"
+msgstr "This page is under construction, use it at your own risk"
+
+#: templates/terminal.jinja2:23
+msgid "Tento projekt by mal byť spravený v 4 - člennom tíme. Ale ..."
+msgstr "This project was supposed to be build in 4-man teams. Oh well..."
+
+#: templates/terminal.jinja2:24
+msgid ""
+"Neodporúčal by som skúšať XSS alebo iný podobný exploit,nakoľko tie fungujú."
+msgstr ""
+"I would advise against trying any XSS or similar exploits, as they will "
+"definitely work."

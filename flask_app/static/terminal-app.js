@@ -13,7 +13,7 @@ const setActiveNavLink = () => {
     const srCurrent = '<span class="sr-only">(current)</span>';
     if (window.location.pathname === '/terminal') {
         // todo remove if this is ever fixed
-        showXSSWarning();
+        showWarning();
         activeLink = $('.nav-link:last');
     } else {
         activeLink = $('.nav-link:first');
@@ -81,7 +81,10 @@ function isNotSafeInput() {
     if (!input || input === '') {
         return true;
     }
-    // todo add some XSS validation
+    if (input.includes("script")==true){
+        showXSSWarning();
+        return true;
+    }
     return false;
 }
 
@@ -127,6 +130,12 @@ function getCommand(position) {
 }
 
 function showXSSWarning() {
+    $("#XSS").dialog({
+        autoOpen: false
+    });
+    $('#XSS').dialog('open');
+}
+function showWarning() {
     $("#dialog").dialog({
         autoOpen: false
     });
