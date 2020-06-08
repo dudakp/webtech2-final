@@ -52,6 +52,7 @@ function createUserPrefix() {
         prefixElem.text(userPrefix);
         commandInput.attr('hidden', false);
         commandInput.focus();
+        setUserEmail(response.email);
     })
 }
 
@@ -128,4 +129,52 @@ function showXSSWarning() {
         autoOpen: false
     });
     $('#dialog').dialog('open');
+}
+
+function setUserEmail(email) {
+    $('#user-email').val(email);
+    resizeInput.call(input[0]);
+}
+
+$('#mail-form :checkbox').change(e => {
+    const target = $(e.target);
+    const targetLabel = target.parent();
+    const type = target[0].id;
+    if (target.is(':checked')) {
+        targetLabel.removeClass(`btn-outline-${type === 'pdf' ? 'danger' : 'success'}`);
+        targetLabel.addClass(`btn-${type === 'pdf' ? 'danger' : 'success'}`);
+    } else {
+        targetLabel.removeClass(`btn-${type === 'pdf' ? 'danger' : 'success'}`);
+        targetLabel.addClass(`btn-outline-${type === 'pdf' ? 'danger' : 'success'}`);
+    }
+    if (!$('#pdf').is(':checked') && !$('#csv').is(':checked')) {
+        $('#send-mail-btn').prop('disabled', true);
+    } else {
+        $('#send-mail-btn').prop('disabled', false);
+    }
+});
+
+$('#mail-form').on('submit', e => {
+    e.preventDefault();
+    const data = {
+        'pdf': $('#pdf').is(':checked'),
+        'csv': $('#csv').is(':checked'),
+        'email': $('#mail-form :input[type=email]').val()
+    };
+    $.get(`/mail?key=${sessionStorage.getItem('apiKey')}`, data, response => {
+        console.log('success: ', response);
+    }).fail(e => {
+        console.log('error: ', e);
+    })
+});
+
+// to scale user email input
+let input = $('#user-email');
+input.on('input', resizeInput); // bind the "resizeInput" callback on "input" event
+resizeInput.call(input[0]); // immediately call the function
+
+function resizeInput() {
+    if (window.location.pathname === '/stats') {
+        this.style.width = this.value.length + 1 + "ch";
+    }
 }

@@ -1,10 +1,12 @@
+import os
 from pathlib import Path
 
-from flask import Blueprint, request, jsonify, current_app, send_file
+from flask import Blueprint, request, jsonify, current_app, send_file, render_template
 from oct2py import Oct2PyError
 from datetime import datetime
+from flask_mail import Message
 
-from flask_app import mongo
+from flask_app import mongo, mail
 from flask_app.auth.service import key_required
 from flask_app.compute.service import MatLab
 from flask_app.util.export import DBExporter
@@ -95,3 +97,27 @@ def pdf_export():
 #     exporter = DBExporter(mongo.db, 'log')
 #     return exporter.compute_stats()
 #     # return send_file(str(Path(__file__).parent.absolute()) + '/../static/stat.pdf', 'stat.pdf')
+
+@compute.route('/mail')
+@key_required
+def send_mail():
+    recipient = request.args.get('email')
+    pdf = request.args.get('pdf') == 'true'
+    csv = request.args.get('csv') == 'true'
+
+    exporter = DBExporter(mongo.db, 'log')
+    msg = Message(subject='Statistics export from Octavia Proxy',
+                  recipients=[recipient])
+    root = str(Path(__file__).parent.absolute())
+    msg.html = render_template('email-template.html')
+    if pdf:
+        exporter.all_to_pdf()
+        with open(root + '/../static/stats.pdf,', 'r') as fp:
+            msg.attach("statistics.pdf", "application/pdf", fp.read())
+    if csv:
+        exporter.all_to_csv()
+        with open(root + '/../static/export.csv', 'r') as fp:
+            msg.attach("statistics.csv", "text/csv", fp.read())
+    mail.send(msg)
+
+    return 'success'

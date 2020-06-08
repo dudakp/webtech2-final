@@ -66,7 +66,7 @@ $(document).ready(function () {
         type = $('#data-options').val();
         r = parameterSlider.bootstrapSlider('getValue');
         if (type === previousType) {
-            getData(r, plotY1, plotY2, false);
+            getData(r, plotY1 || 0, plotY2 || 0, false);
         } else {
             previousType = type;
             plotX = 0;

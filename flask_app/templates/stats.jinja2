@@ -7,9 +7,29 @@
 
 {% block content %}
     <div class="container">
-    <h1>Celkovo volani: {{ stats[2] }}</h1>
-    <h2>uspesnych: {{ stats[1]['SUCCESS'] }}</h2>
-    <h2>neuspesnych: {{ stats[1]['ERROR'] }}</h2>
+        <form class="form-inline" id="mail-form">
+            <div class="btn-toolbar mb-3" role="toolbar" aria-label="Toolbar with button groups">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text" id="btnGroupAddon">Send stats to:</div>
+                    </div>
+                    <input type="email" class="form-control" placeholder="User email address"
+                           aria-label="User email address" aria-describedby="btnGroupAddon" id="user-email">
+                </div>
+                <div class="btn-group mr-2 left-margin" role="group" aria-label="First group">
+                    <label class="btn btn-outline-success">
+                        <input type="checkbox" autocomplete="off" hidden id="csv"> CSV
+                    </label>
+                    <label class="btn btn-outline-danger">
+                        <input type="checkbox" autocomplete="off" hidden id="pdf"> PDF
+                    </label>
+                </div>
+                <input type="submit" class="btn btn-dark btn-md" value="Send" id="send-mail-btn" disabled>
+            </div>
+        </form>
+        <h1>Celkovo volani: {{ stats[2] }}</h1>
+        <h2>uspesnych: {{ stats[1]['SUCCESS'] }}</h2>
+        <h2>neuspesnych: {{ stats[1]['ERROR'] }}</h2>
         <table class="table">
             <thead>
             <tr>
