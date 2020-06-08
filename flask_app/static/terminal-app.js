@@ -25,6 +25,8 @@ const setActiveNavLink = () => {
 $(document).ready(() => {
     setActiveNavLink();
     createUserPrefix();
+    $('#mail-error-message').hide();
+    $('#mail-success-message').hide();
 });
 
 $('#command-form').on('submit', e => {
@@ -162,11 +164,20 @@ $('#mail-form').on('submit', e => {
         'email': $('#mail-form :input[type=email]').val()
     };
     $.get(`/mail?key=${sessionStorage.getItem('apiKey')}`, data, response => {
-        console.log('success: ', response);
+        showResponse('success');
     }).fail(e => {
-        console.log('error: ', e);
+        showResponse('error');
     })
 });
+
+function showResponse(type) {
+    console.log('showing ', `#mail-${type}-message`);
+    $(`#mail-${type}-message`).show();
+    setTimeout(e => {
+        $(`#mail-${type}-message`).hide();
+        console.log('hiding');
+    }, 3500);
+}
 
 // to scale user email input
 let input = $('#user-email');

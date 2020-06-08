@@ -87,6 +87,18 @@
     min-width: 20ch;
 }
 
+#mail-error-message {
+    color: red;
+}
+
+#mail-success-message {
+    color: #28a745;
+}
+
+.response-text {
+    position: relative;    
+}
+
 /*remove below*/
 
 .ui-widget {

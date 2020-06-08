@@ -25,8 +25,13 @@
                     </label>
                 </div>
                 <input type="submit" class="btn btn-dark btn-md" value="Send" id="send-mail-btn" disabled>
+                <span id="mail-success-message" class="left-margin response-text">
+                    {{ _('Mail úspešne odoslaný') }}</span>
+                <span id="mail-error-message" class="left-margin response-text">
+                    {{ _('Odosielanie mailu zlyhalo') }}</span>
             </div>
         </form>
+
         <h1>Celkovo volani: {{ stats[2] }}</h1>
         <h2>uspesnych: {{ stats[1]['SUCCESS'] }}</h2>
         <h2>neuspesnych: {{ stats[1]['ERROR'] }}</h2>
