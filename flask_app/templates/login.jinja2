@@ -2,7 +2,7 @@
 
 {% block content %}
     <form id="login-form" class="form" action="" method="post">
-        <h3 class="text-center text-info">Prihlásenie</h3>
+        <h3 class="text-center text-info">{{ _('Prihlásenie') }}</h3>
         <div class="form-group">
             {{ form.email.label(class_="text-info") }}
             {{ form.email(class_="form-control") }}
@@ -30,8 +30,8 @@
             {{ form.remember.label(class_="text-info form-check-label") }}
         </div>
         <div class="form-group d-flex pt-2 pb-2 link-container">
-            <input type="submit" name="submit" class="btn btn-info btn-md" value="Prihlásiť sa">
-            <a href="/register" class="link text-info">Ešte nemáte účet?</a>
+            <input type="submit" name="submit" class="btn btn-info btn-md" value={{ _('Prihlásiť sa') }}>
+            <a href="/register" class="link text-info">{{ _('Ešte nemáte účet?') }}</a>
         </div>
     </form>
 
