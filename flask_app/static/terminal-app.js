@@ -171,11 +171,9 @@ $('#mail-form').on('submit', e => {
 });
 
 function showResponse(type) {
-    console.log('showing ', `#mail-${type}-message`);
     $(`#mail-${type}-message`).show();
     setTimeout(e => {
         $(`#mail-${type}-message`).hide();
-        console.log('hiding');
     }, 3500);
 }
 
