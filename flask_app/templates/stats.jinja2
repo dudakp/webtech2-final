@@ -7,6 +7,9 @@
 
 {% block content %}
     <div class="container">
+    <h1>Celkovo volani: {{ stats[2] }}</h1>
+    <h2>uspesnych: {{ stats[1]['SUCCESS'] }}</h2>
+    <h2>neuspesnych: {{ stats[1]['ERROR'] }}</h2>
         <table class="table">
             <thead>
             <tr>
@@ -15,7 +18,7 @@
             </tr>
             </thead>
             <tbody>
-            {% for k, v in stats|dictsort(by='value', reverse=True) %}
+            {% for k, v in stats[0]|dictsort(by='value', reverse=True) %}
                 <tr>
                     <th>{{ k }}</th>
                     <td>{{ v }}</td>

@@ -27,9 +27,13 @@ class DBExporter(metaclass=Singleton):
         pdfkit.from_file(root + '/../static/export.html', root + '/../static/export.pdf')
 
     def compute_stats(self):
+        # pocet volani celkovo, pocet uspesnych, pocet neuspesnych
         df = pd.DataFrame(list(self.db.find({})))
-        del df['_id']
-        del df['timestamp']
-        del df['result']
-        del df['info']
-        return df.groupby('command').command.count().to_dict()
+        hist = df.groupby('command').command.count().to_dict()
+        results = df.groupby('result').result.count().to_dict()
+        total_calls = df['_id'].count()
+        import pprint
+        pp = pprint.PrettyPrinter(indent=4)
+        pp.pprint(hist)
+        pp.pprint(total_calls)
+        return hist, results, total_calls
