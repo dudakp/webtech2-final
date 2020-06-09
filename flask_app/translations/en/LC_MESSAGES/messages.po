@@ -7,29 +7,28 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2020-06-09 08:15+0200\n"
-"PO-Revision-Date: 2020-06-09 08:24+0200\n"
+"POT-Creation-Date: 2020-06-09 22:01+0200\n"
+"PO-Revision-Date: 2020-06-09 22:01+0200\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
 "Language-Team: en <LL@li.org>\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.8.0\n"
-"Last-Translator: \n"
-"X-Generator: Poedit 2.3.1\n"
 
-#: compute/routes.py:109
+#: compute/routes.py:110
 msgid "Export štatistík z aplikácie Octavia Proxy"
 msgstr "Export stats from Octavia Proxy application"
 
 #: templates/base.jinja2:13
 msgid "WebTech2 Finálne Zadanie"
-msgstr "WebTech2 Final Assignment"
+msgstr ""
 
 #: templates/base.jinja2:20
 msgid "WEBTE2 Octavia Proxy"
-msgstr "WEBTE2 Octavia Proxy"
+msgstr "WebTech2 Final Assignment"
 
 #: templates/base.jinja2:29
 msgid "Simulácie"
@@ -39,45 +38,49 @@ msgstr "Simulations"
 msgid "Octave terminál"
 msgstr "Octave terminal"
 
-#: templates/base.jinja2:44
-msgid "Zobraz a pošli štaty"
-msgstr "Show and send stats"
+#: templates/base.jinja2:35
+msgid "Štatistiky"
+msgstr "Statistics"
 
-#: templates/base.jinja2:62
+#: templates/base.jinja2:39
+msgid "Rozdelenie práce"
+msgstr "Work distribution"
+
+#: templates/base.jinja2:41
 msgid "API dokumentácia"
 msgstr "API documentation"
 
-#: templates/base.jinja2:64
+#: templates/base.jinja2:43
 msgid "Odhlásiť sa"
-msgstr "LogOut"
+msgstr "Logout"
 
 #: templates/formBase.jinja2:10
 msgid "WebTech2 Finalné Zadanie"
-msgstr "WebTech2 Final Assignment"
+msgstr "Webtech2 Final Assignment"
 
-#: templates/formBase.jinja2:16
+#: templates/formBase.jinja2:17
 msgid "Octavia proxy"
 msgstr "Octavia proxy"
 
 #: templates/index.jinja2:16
 msgid "Vyber si graf :"
-msgstr "Choose a graph :"
+msgstr "Select graph :"
 
 #: templates/index.jinja2:32
 msgid "Zobraz graf"
 msgstr "Show graph"
 
-#: templates/login.jinja2:40
+#: templates/login.jinja2:5
 msgid "Prihlásenie"
 msgstr "Login"
 
-#: templates/login.jinja2:68
+#: templates/login.jinja2:33
 msgid "Prihlásiť sa"
-msgstr "LogIn"
+msgstr "Sign in"
 
-#: templates/login.jinja2:69
+#: templates/login.jinja2:34
 msgid "Ešte nemáte účet?"
-msgstr "Doesn't have an account?"
+msgstr "Don't have an account yet?"
 
 #: templates/register.jinja2:5
 msgid "Registrácia"
@@ -91,17 +94,29 @@ msgstr "Create account"
 msgid "Už máte účet?"
 msgstr "Already have an account?"
 
+#: templates/stats.jinja2:14
+msgid "Odoslať štatistiky na:"
+msgstr "Send stats to:"
+
+#: templates/stats.jinja2:16
+msgid "Emailová adresa"
+msgstr "Email address"
+
+#: templates/stats.jinja2:27
+msgid "Odoslať"
+msgstr "Send"
+
 #: templates/stats.jinja2:29
 msgid "Mail úspešne odoslaný"
-msgstr "Mail has been successfully sent"
+msgstr "Mail sent successfully"
 
 #: templates/stats.jinja2:31
 msgid "Odosielanie mailu zlyhalo"
-msgstr "Mail send failure"
+msgstr "Sending email failed"
 
 #: templates/stats.jinja2:35
 msgid "Celkovo volaní :"
-msgstr "Number of calls :"
+msgstr "Total calls :"
 
 #: templates/stats.jinja2:36
 msgid "Úspešných :"
@@ -109,7 +124,7 @@ msgstr "Successful :"
 
 #: templates/stats.jinja2:37
 msgid "Neúspešných:"
-msgstr "Failed:"
+msgstr "Unsuccessful:"
 
 #: templates/stats.jinja2:41
 msgid "Príkaz"
@@ -118,22 +133,3 @@ msgstr "Command"
 #: templates/stats.jinja2:42
 msgid "Volanie"
 msgstr "Calls"
-
-#: templates/terminal.jinja2:22
-msgid "Na stránke sa práve pracuje, používanie stránky je na vlastnú zodpovednosť"
-msgstr "This page is under construction, use it at your own risk"
-
-#: templates/terminal.jinja2:23
-msgid "Tento projekt by mal byť spravený v 4 - člennom tíme. Ale ..."
-msgstr "This project was supposed to be build in 4-man teams. Oh well..."
-
-#: templates/terminal.jinja2:24
-msgid ""
-"Neodporúčal by som skúšať XSS alebo iný podobný exploit,nakoľko tie fungujú."
-msgstr ""
-"I would advise against trying any XSS or similar exploits, as they will "
-"definitely work."
-
-#: templates/terminal.jinja2:28
-msgid "Netolerujeme XSS"
-msgstr "We are not tolerating XSS"
