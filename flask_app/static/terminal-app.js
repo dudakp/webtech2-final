@@ -30,6 +30,7 @@ $(document).ready(() => {
 $('#command-form').on('submit', e => {
     e.preventDefault();
     if (isNotSafeInput()) {
+        commandInput.val('');
         return;
     }
     $.ajax({
