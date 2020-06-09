@@ -12,8 +12,6 @@ const setActiveNavLink = () => {
     let activeLink;
     const srCurrent = '<span class="sr-only">(current)</span>';
     if (window.location.pathname === '/terminal') {
-        // todo remove if this is ever fixed
-        showWarning();
         activeLink = $('.nav-link:last');
     } else {
         activeLink = $('.nav-link:first');
@@ -81,11 +79,8 @@ function isNotSafeInput() {
     if (!input || input === '') {
         return true;
     }
-    if (input.includes("script")==true){
-        showXSSWarning();
-        return true;
-    }
-    return false;
+    return input.includes("script") === true;
+
 }
 
 function htmlEncode(str) {
@@ -127,19 +122,6 @@ function getCommand(position) {
         return saved[saved.length - 1 - position];
     }
     return '';
-}
-
-function showXSSWarning() {
-    $("#XSS").dialog({
-        autoOpen: false
-    });
-    $('#XSS').dialog('open');
-}
-function showWarning() {
-    $("#dialog").dialog({
-        autoOpen: false
-    });
-    $('#dialog').dialog('open');
 }
 
 function setUserEmail(email) {

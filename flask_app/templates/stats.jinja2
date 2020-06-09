@@ -8,12 +8,12 @@
 {% block content %}
     <div class="container">
         <form class="form-inline" id="mail-form">
-            <div class="btn-toolbar mb-3" role="toolbar" aria-label="Toolbar with button groups">
+            <div class="btn-toolbar mb-3 top-margin" role="toolbar" aria-label="Toolbar with button groups">
                 <div class="input-group">
                     <div class="input-group-prepend">
-                        <div class="input-group-text" id="btnGroupAddon">Send stats to:</div>
+                        <div class="input-group-text" id="btnGroupAddon">{{ _('Odoslať štatistiky na:') }}</div>
                     </div>
-                    <input type="email" class="form-control" placeholder="User email address"
+                    <input type="email" class="form-control" placeholder="{{ _('Emailová adresa') }}"
                            aria-label="User email address" aria-describedby="btnGroupAddon" id="user-email">
                 </div>
                 <div class="btn-group mr-2 left-margin" role="group" aria-label="First group">
@@ -24,7 +24,7 @@
                         <input type="checkbox" autocomplete="off" hidden id="pdf"> PDF
                     </label>
                 </div>
-                <input type="submit" class="btn btn-dark btn-md" value="Send" id="send-mail-btn" disabled>
+                <input type="submit" class="btn btn-dark btn-md" value="{{ _('Odoslať') }}" id="send-mail-btn" disabled>
                 <span id="mail-success-message" class="left-margin response-text">
                     {{ _('Mail úspešne odoslaný') }}</span>
                 <span id="mail-error-message" class="left-margin response-text">
