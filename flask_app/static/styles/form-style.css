@@ -55,3 +55,21 @@ div .container #login-row #login-column #login-box #login-form {
 .main-nav {
     font-size: 40px !important;
 }
+
+.language-switch {
+    margin: 2em 1.5em 1em 3em;
+}
+
+.language-switch-link {
+    text-decoration: none;
+    color: white;
+}
+
+.language-switch-link:hover {
+    text-decoration: none;
+    color: grey;
+}
+
+.octavia-header {
+    padding-left: 2.5em !important;
+}
