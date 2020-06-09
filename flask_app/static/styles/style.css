@@ -14,6 +14,10 @@
     margin-top: 2em;
 }
 
+.left-margin {
+    margin-left: 1em;
+}
+
 .simulation-content {
     margin-top: 3rem;
 }
@@ -79,6 +83,24 @@
     color: red;
 }
 
+#user-email {
+    min-width: 20ch;
+}
+
+#mail-error-message {
+    color: red;
+}
+
+#mail-success-message {
+    color: #28a745;
+}
+
+.response-text {
+    position: relative;    
+}
+
+/*remove below*/
+
 .ui-widget {
     font-family: Verdana,Arial,sans-serif;
     font-size: .8em;
@@ -122,4 +144,5 @@
     position: relative;
         font-size: 1em;
 }
+
 

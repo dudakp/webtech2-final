@@ -39,7 +39,7 @@ function updateAnimation(value1, value2) {
         startAnimation();
     }
     $('.car img').css('transform', 'translateY(' + (value1 - r) * 10 + 'px)');
-    $('.wheels').css('transform', 'translateY(' + value2 * 10 + 'px)');
+    $('.wheels').css('transform', 'translateY(' + value2 * 50 + 'px)');
 }
 
 function updateAnimationSpeed(value) {

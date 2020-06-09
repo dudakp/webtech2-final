@@ -13,7 +13,7 @@ const setActiveNavLink = () => {
     const srCurrent = '<span class="sr-only">(current)</span>';
     if (window.location.pathname === '/terminal') {
         // todo remove if this is ever fixed
-        showXSSWarning();
+        showWarning();
         activeLink = $('.nav-link:last');
     } else {
         activeLink = $('.nav-link:first');
@@ -25,6 +25,8 @@ const setActiveNavLink = () => {
 $(document).ready(() => {
     setActiveNavLink();
     createUserPrefix();
+    $('#mail-error-message').hide();
+    $('#mail-success-message').hide();
 });
 
 $('#command-form').on('submit', e => {
@@ -52,6 +54,7 @@ function createUserPrefix() {
         prefixElem.text(userPrefix);
         commandInput.attr('hidden', false);
         commandInput.focus();
+        setUserEmail(response.email);
     })
 }
 
@@ -78,7 +81,10 @@ function isNotSafeInput() {
     if (!input || input === '') {
         return true;
     }
-    // todo add some XSS validation
+    if (input.includes("script")==true){
+        showXSSWarning();
+        return true;
+    }
     return false;
 }
 
@@ -124,8 +130,69 @@ function getCommand(position) {
 }
 
 function showXSSWarning() {
+    $("#XSS").dialog({
+        autoOpen: false
+    });
+    $('#XSS').dialog('open');
+}
+function showWarning() {
     $("#dialog").dialog({
         autoOpen: false
     });
     $('#dialog').dialog('open');
+}
+
+function setUserEmail(email) {
+    $('#user-email').val(email);
+    resizeInput.call(input[0]);
+}
+
+$('#mail-form :checkbox').change(e => {
+    const target = $(e.target);
+    const targetLabel = target.parent();
+    const type = target[0].id;
+    if (target.is(':checked')) {
+        targetLabel.removeClass(`btn-outline-${type === 'pdf' ? 'danger' : 'success'}`);
+        targetLabel.addClass(`btn-${type === 'pdf' ? 'danger' : 'success'}`);
+    } else {
+        targetLabel.removeClass(`btn-${type === 'pdf' ? 'danger' : 'success'}`);
+        targetLabel.addClass(`btn-outline-${type === 'pdf' ? 'danger' : 'success'}`);
+    }
+    if (!$('#pdf').is(':checked') && !$('#csv').is(':checked')) {
+        $('#send-mail-btn').prop('disabled', true);
+    } else {
+        $('#send-mail-btn').prop('disabled', false);
+    }
+});
+
+$('#mail-form').on('submit', e => {
+    e.preventDefault();
+    const data = {
+        'pdf': $('#pdf').is(':checked'),
+        'csv': $('#csv').is(':checked'),
+        'email': $('#mail-form :input[type=email]').val()
+    };
+    $.get(`/mail?key=${sessionStorage.getItem('apiKey')}`, data, response => {
+        showResponse('success');
+    }).fail(e => {
+        showResponse('error');
+    })
+});
+
+function showResponse(type) {
+    $(`#mail-${type}-message`).show();
+    setTimeout(e => {
+        $(`#mail-${type}-message`).hide();
+    }, 3500);
+}
+
+// to scale user email input
+let input = $('#user-email');
+input.on('input', resizeInput); // bind the "resizeInput" callback on "input" event
+resizeInput.call(input[0]); // immediately call the function
+
+function resizeInput() {
+    if (window.location.pathname === '/stats') {
+        this.style.width = this.value.length + 1 + "ch";
+    }
 }

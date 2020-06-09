@@ -8,6 +8,7 @@ from flask_bcrypt import Bcrypt
 from flask_cors import CORS
 from flask_login import LoginManager
 from flask_pymongo import PyMongo
+from flask_mail import Mail
 
 config_json_path = os.path.join(str(pathlib.Path.cwd()), 'flask_app/config.json')
 mongo = PyMongo()
@@ -23,6 +24,19 @@ babel = Babel(app)
 
 with open(config_json_path) as f:
     config = json.load(f)
+
+mail_settings = {
+    "MAIL_SERVER": 'smtp.gmail.com',
+    "MAIL_PORT": 587,
+    "MAIL_USE_TLS": True,
+    "MAIL_USE_SSL": False,
+    "MAIL_USERNAME": config.get('EMAIL_USER'),
+    "MAIL_PASSWORD": config.get('EMAIL_PASSWORD'),
+    "MAIL_DEFAULT_SENDER": config.get('EMAIL_USER'),
+}
+
+app.config.update(mail_settings)
+mail = Mail(app)
 
 
 @babel.localeselector

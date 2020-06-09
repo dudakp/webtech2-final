@@ -19,8 +19,13 @@
         </div>
     </div>
     <div id="dialog" title="Warning">
-        <p style="font-weight: bold">This page is under construction, use it at your own risk.</p>
-        <p>This project was supposed to be build in 4-man teams. Oh well...</p>
-        <span>I would advise against trying any XSS or similar exploits, as they will definitely work.</span>
+        <p style="font-weight: bold">{{ _('Na stránke sa práve pracuje, používanie stránky je na vlastnú zodpovednosť') }}</p>
+        <p>{{_('Tento projekt by mal byť spravený v 4 - člennom tíme. Ale ...')}}</p>
+        <span>{{_('Neodporúčal by som skúšať XSS alebo iný podobný exploit,nakoľko tie fungujú.')}}</span>
     </div>
+
+    <div id="XSS" title="Script Warning">
+        <p style="font-weight: bold">{{ _('Netolerujeme XSS') }}</p>
+    </div>
+
 {% endblock %}

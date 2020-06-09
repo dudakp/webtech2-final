@@ -149,3 +149,9 @@ dmypy.json
 
 # Cython debug symbols
 cython_debug/
+
+# app generated files
+export.csv
+export.html
+stats.pdf
+stats.html

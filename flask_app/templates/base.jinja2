@@ -10,14 +10,14 @@
               rel="stylesheet">
         <link href="{{ url_for('static', filename='styles/style.css') }}"
               rel="stylesheet">
-        <title>{% block title %}{% endblock %} Webtech2 final assigment </title>
+        <title>{% block title %}{% endblock %} {{ _('WebTech2 Finálne Zadanie') }} </title>
     {% endblock %}
 </head>
 
 <body>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light shadow">
-    <a class="navbar-brand" href="/">WEBTE2 octavia proxy</a>
+    <a class="navbar-brand" href="/">{{ _('WEBTE2 Octavia Proxy') }}</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -26,19 +26,20 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link" href="/">Simulacie</a>
+                <a class="nav-link" href="/">{{ _('Simulácie') }} <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="terminal">Octave terminal</a>
+                <a class="nav-link" href="terminal">{{ _('Octave terminál') }}</a>
             </li>
         </ul>
 
-        <a class="logout-btn btn btn-md" href="stats"> Statistics</a>
+        <a class="logout-btn btn btn-md" href="stats"> {{ _('Zobraz a pošli staty') }}</a>
         <a class="logout-btn btn btn-md" target="_blank"
-{#           TODO change this once you create a real documentation #}
-           href="https://app.swaggerhub.com/apis/Ajordon11/final-assignment-webtech2/1.0.0-oas3">API dokumentacia</a>
+           href="https://app.swaggerhub.com/apis/Ajordon11/final-assignment-webtech2/1.0.0-oas3">{{ _('API dokumentácia') }}</a>
+        <a class="logout-btn btn btn-md"
+               href="https://trello.com/b/iS2wU2s0/webtech2"> {{ _('Zobraz rozdelenie prace') }} </a>
         <form class="form-inline my-2 my-lg-0" action="/logout" method="post">
-            <input type="submit" class="logout-btn btn btn-md" value="Odhlásiť sa">
+            <input type="submit" class="logout-btn btn btn-md" value={{ _('Odhlásiť sa') }}>
         </form>
         <div class="btn-group">
             <button class="logout-btn btn btn-md btn-dropdown mr-5" type="button" data-toggle="dropdown"
@@ -47,7 +48,6 @@
                 <img style="width: 1rem" src="../static/assets/images/{{ CURRENT_LANGUAGE }}.svg"
                      alt="{{ CURRENT_LANGUAGE }} flag">
             </button>
-
             <div class="dropdown-menu">
                 {# hehe, dirty shit ako keby to pisal prvak tu nebudeme tolerovat#}
                 {% for language in AVAILABLE_LANGUAGES.items() %}
@@ -58,8 +58,8 @@
                     {% else %}
                         <a href="{{ url_for('user.set_language', language=language[0]) }}"
                            class="dropdown-item">{{ language[1] }}
-                        <img style="width: 1rem" src="../static/assets/images/{{ language[0] }}.svg"
-                             alt="{{ language[1] }} flag"> </a>
+                            <img style="width: 1rem" src="../static/assets/images/{{ language[0] }}.svg"
+                                 alt="{{ language[1] }} flag"> </a>
                     {% endif %}
                 {% endfor %}
             </div>
