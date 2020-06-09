@@ -46,8 +46,12 @@ div .container #login-row #login-column #login-box #login-form {
     text-decoration: none;
 }
 
-.main-title {
-    background-color: rgb(19, 130, 148);
-    padding-bottom: 50px !important;
-    padding-top: 50px !important;
+.main-bar {
+    height: 100px !important;
+    background-color: #355C7D !important;
+    color: white !important;
+}
+
+.main-nav {
+    font-size: 40px !important;
 }
