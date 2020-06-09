@@ -16,7 +16,7 @@
 
 <body>
 
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-light bg-light shadow">
     <a class="navbar-brand" href="/">WEBTE2 octavia proxy</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -32,17 +32,22 @@
                 <a class="nav-link" href="terminal">Octave terminal</a>
             </li>
         </ul>
+
+        <a class="logout-btn btn btn-md" href="stats"> Statistics</a>
+        <a class="logout-btn btn btn-md" target="_blank"
+{#           TODO change this once you create a real documentation #}
+           href="https://app.swaggerhub.com/apis/Ajordon11/final-assignment-webtech2/1.0.0-oas3">API dokumentacia</a>
+        <form class="form-inline my-2 my-lg-0" action="/logout" method="post">
+            <input type="submit" class="logout-btn btn btn-md" value="Odhlásiť sa">
+        </form>
         <div class="btn-group">
-            <button class="btn btn-light btn-sm btn-dropdown" type="button" data-toggle="dropdown"
+            <button class="logout-btn btn btn-md btn-dropdown mr-5" type="button" data-toggle="dropdown"
                     aria-haspopup="true" aria-expanded="false">
                 {{ CURRENT_LANGUAGE }}
                 <img style="width: 1rem" src="../static/assets/images/{{ CURRENT_LANGUAGE }}.svg"
                      alt="{{ CURRENT_LANGUAGE }} flag">
             </button>
-            <button class="btn btn-light" type="button"
-                    aria-haspopup="true" aria-expanded="false" >
-                <a href="stats"> Display and send stats </a>
-            </button>
+
             <div class="dropdown-menu">
                 {# hehe, dirty shit ako keby to pisal prvak tu nebudeme tolerovat#}
                 {% for language in AVAILABLE_LANGUAGES.items() %}
@@ -59,12 +64,6 @@
                 {% endfor %}
             </div>
         </div>
-        <a class="btn btn-outline-success my-2 my-sm-0" target="_blank"
-{#           TODO change this once you create a real documentation #}
-           href="https://app.swaggerhub.com/apis/Ajordon11/final-assignment-webtech2/1.0.0-oas3">API dokumentacia</a>
-        <form class="form-inline my-2 my-lg-0" action="/logout" method="post">
-            <input type="submit" class="btn btn-info btn-md" value="Odhlásiť sa">
-        </form>
     </div>
 </nav>
 

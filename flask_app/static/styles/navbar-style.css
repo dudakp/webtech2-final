@@ -2,3 +2,36 @@
     margin-left: .5rem;
     margin-right: .5rem;
 }
+
+.navbar {
+    background-color: #355C7D !important;
+}
+
+.nav-item > a {
+    color: white !important;
+    transition: color cubic-bezier(.17,.67,.83,.67) 300ms;
+}
+
+.nav-item > a:hover {
+    color: #5d87aa !important;
+}
+
+.navbar-brand {
+    color: white !important;
+    transition: color cubic-bezier(.17,.67,.83,.67) 300ms;
+}
+
+.navbar-brand:hover {
+    color: #5d87aa !important;
+}
+
+.logout-btn {
+    color: white !important;
+    background-color: #5d87aa;
+    transition: background-color cubic-bezier(.17,.67,.83,.67) 300ms;
+    border-radius: 5px !important;
+}
+
+.logout-btn:hover {
+   background-color: #5082aa;
+}
