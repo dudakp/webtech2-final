@@ -26,18 +26,19 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item">
-                <a class="nav-link" href="/">{{ _('Simulácie') }} <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="/">{{ _('Simulácie') }}</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="terminal">{{ _('Octave terminál') }}</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="stats"> {{ _('Štatistiky') }}</a>
+            </li>
         </ul>
-
-        <a class="logout-btn btn btn-md" href="stats"> {{ _('Zobraz a pošli staty') }}</a>
+        <a class="logout-btn btn btn-md" target="_blank"
+           href="https://trello.com/b/iS2wU2s0/webtech2"> {{ _('Rozdelenie práce') }} </a>
         <a class="logout-btn btn btn-md" target="_blank"
            href="https://app.swaggerhub.com/apis/Malph1/WebTe2FinalAPIDoc/1.0.0">{{ _('API dokumentácia') }}</a>
-        <a class="logout-btn btn btn-md"
-               href="https://trello.com/b/iS2wU2s0/webtech2"> {{ _('Zobraz rozdelenie prace') }} </a>
         <form class="form-inline my-2 my-lg-0" action="/logout" method="post">
             <input type="submit" class="logout-btn btn btn-md" value={{ _('Odhlásiť sa') }}>
         </form>
