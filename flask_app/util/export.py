@@ -21,17 +21,17 @@ class DBExporter(metaclass=Singleton):
             df = pd.DataFrame(list(self.db.find({})))
             del df['_id']
             df.to_html(root + '/../static/export.html', index=False, header=True)
-            print('exporting invoked in route')
-        print('exporting invoked by client')
-        dataframe.to_html(root + '/../static/stats.html', index=False, header=True)
+        else:
+            dataframe.to_html(root + '/../static/stats.html', index=False, header=True)
 
     def all_to_pdf(self, dataframe=None):
         root = str(Path(__file__).parent.absolute())
         if dataframe is None:
             self.all_to_html()
             pdfkit.from_file(root + '/../static/export.html', root + '/../static/export.pdf')
-        self.all_to_html(dataframe)
-        pdfkit.from_file(root + '/../static/stats.html', root + '/../static/stats.pdf')
+        else:
+            self.all_to_html(dataframe)
+            pdfkit.from_file(root + '/../static/stats.html', root + '/../static/stats.pdf')
 
     def compute_stats(self):
         # pocet volani celkovo, pocet uspesnych, pocet neuspesnych

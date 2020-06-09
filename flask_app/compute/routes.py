@@ -1,11 +1,12 @@
+from datetime import datetime
 from pathlib import Path
 
 from flask import Blueprint, request, jsonify, current_app, send_file, render_template
 from flask_babel import gettext
-from oct2py import Oct2PyError
-from datetime import datetime
 from flask_mail import Message
+from oct2py import Oct2PyError
 
+from flask_app import config
 from flask_app import mongo, mail
 from flask_app.auth.service import key_required
 from flask_app.compute.service import MatLab
@@ -108,15 +109,14 @@ def send_mail():
     exporter = DBExporter(mongo.db, 'log')
     msg = Message(subject=gettext(u'Export štatistík z aplikácie Octavia Proxy'),
                   recipients=[recipient])
-    root = str(Path(__file__).parent.absolute())
     msg.html = render_template('email-template.html')
     if pdf:
         exporter.all_to_pdf()
-        with open(root + '/../static/stats.pdf,', 'r') as fp:
+        with open(config['STATIC_PATH'] + 'stats.pdf', 'rb') as fp:
             msg.attach("statistics.pdf", "application/pdf", fp.read())
     if csv:
         exporter.all_to_csv()
-        with open(root + '/../static/export.csv', 'r') as fp:
+        with open(config['STATIC_PATH'] + 'export.csv', 'rb') as fp:
             msg.attach("statistics.csv", "text/csv", fp.read())
     mail.send(msg)
 
